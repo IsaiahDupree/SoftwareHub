@@ -231,7 +231,8 @@
       "description": "Create admin packages list page with table view",
       "acceptance_criteria": ["Lists all packages (published and unpublished)", "Shows type badge, status, version", "Edit/delete actions", "Create button"],
       "file_hint": "app/admin/packages/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-022",
@@ -241,7 +242,8 @@
       "description": "Create package create/edit form component",
       "acceptance_criteria": ["Form with all package fields", "Type selector (LOCAL_AGENT/CLOUD_APP)", "Features array editor", "Requirements JSON editor"],
       "file_hint": "components/admin/PackageForm.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-023",
@@ -251,7 +253,8 @@
       "description": "Create admin package create page",
       "acceptance_criteria": ["Uses PackageForm component", "Submits to POST /api/admin/packages", "Redirects to edit page on success", "Shows validation errors"],
       "file_hint": "app/admin/packages/new/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-024",
@@ -261,7 +264,8 @@
       "description": "Create admin package edit page",
       "acceptance_criteria": ["Loads existing package data", "Uses PackageForm component", "Submits to PUT /api/admin/packages/[id]", "Shows success message"],
       "file_hint": "app/admin/packages/[id]/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-025",
@@ -271,7 +275,8 @@
       "description": "Create admin releases management page",
       "acceptance_criteria": ["Lists releases for package", "Shows version, channel, downloads", "Upload new release form", "Set as current toggle"],
       "file_hint": "app/admin/packages/[id]/releases/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-026",
@@ -281,7 +286,8 @@
       "description": "Create release upload form with progress",
       "acceptance_criteria": ["Version input with validation", "Channel selector", "File upload with progress bar", "Release notes markdown editor"],
       "file_hint": "components/admin/ReleaseUploadForm.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-027",
@@ -291,7 +297,8 @@
       "description": "Add icon and screenshot upload to package form",
       "acceptance_criteria": ["Icon upload with preview", "Multiple screenshot upload", "Drag and drop support", "Delete uploaded images"],
       "file_hint": "components/admin/ImageUpload.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-028",
