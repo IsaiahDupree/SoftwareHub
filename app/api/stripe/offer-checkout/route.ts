@@ -103,6 +103,26 @@ export async function POST(req: NextRequest) {
 
     priceId = offer.stripe_price_id;
     mode = "payment";
+  } else if (kind === "package_bundle") {
+    // Package bundles: multiple software packages in one purchase
+    const bundleId = payload.bundleId as string;
+    if (!bundleId) {
+      return NextResponse.json({ error: "Bundle ID not configured" }, { status: 400 });
+    }
+
+    const { data: bundle } = await supabase
+      .from("package_bundles")
+      .select("stripe_price_id")
+      .eq("id", bundleId)
+      .eq("is_published", true)
+      .single();
+
+    if (!bundle?.stripe_price_id) {
+      return NextResponse.json({ error: "Package bundle not purchasable" }, { status: 400 });
+    }
+
+    priceId = bundle.stripe_price_id;
+    mode = "payment";
   } else {
     return NextResponse.json({ error: "Unknown offer kind" }, { status: 400 });
   }
@@ -139,6 +159,10 @@ export async function POST(req: NextRequest) {
       // For bundles, include courseIds as JSON string
       ...(kind === "bundle" && payload.courseIds
         ? { bundle_course_ids: JSON.stringify(payload.courseIds) }
+        : {}),
+      // For package bundles, include bundleId
+      ...(kind === "package_bundle" && payload.bundleId
+        ? { package_bundle_id: payload.bundleId as string }
         : {}),
     },
   };

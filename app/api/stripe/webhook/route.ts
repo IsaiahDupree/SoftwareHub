@@ -31,6 +31,11 @@ export async function POST(req: Request) {
       await handlePackagePurchase(session);
     }
 
+    // Handle package bundle purchases
+    if (kind === "package_bundle") {
+      await handlePackageBundlePurchase(session);
+    }
+
     const courseId = session.metadata?.course_id;
     const bundleCourseIds = session.metadata?.bundle_course_ids
       ? JSON.parse(session.metadata.bundle_course_ids)
@@ -407,5 +412,127 @@ async function handlePackagePurchase(session: Stripe.Checkout.Session) {
     });
   } catch (err) {
     console.error("Error processing package purchase:", err);
+  }
+}
+
+async function handlePackageBundlePurchase(session: Stripe.Checkout.Session) {
+  const bundleId = session.metadata?.package_bundle_id;
+  const userId = session.metadata?.user_id;
+  const email = session.customer_details?.email;
+
+  if (!bundleId || !userId) {
+    console.error("Package bundle purchase missing metadata:", { bundleId, userId });
+    return;
+  }
+
+  try {
+    // Get bundle items (package IDs)
+    let packageIds: string[] = [];
+    if (session.metadata?.package_ids) {
+      packageIds = JSON.parse(session.metadata.package_ids);
+    } else {
+      // Fallback: look up from DB
+      const { data: items } = await supabaseAdmin
+        .from("package_bundle_items")
+        .select("package_id")
+        .eq("bundle_id", bundleId);
+      packageIds = (items || []).map((i: { package_id: string }) => i.package_id);
+    }
+
+    if (packageIds.length === 0) {
+      console.error("Package bundle has no items:", bundleId);
+      return;
+    }
+
+    const { generateUniqueLicenseKey } = await import("@/lib/licenses/generate");
+    const { hashLicenseKey } = await import("@/lib/licenses/hash");
+
+    // Create entitlement + license for each package in the bundle
+    for (const packageId of packageIds) {
+      // Create package entitlement
+      await supabaseAdmin.from("package_entitlements").upsert(
+        {
+          user_id: userId,
+          package_id: packageId,
+          has_access: true,
+          access_level: "full",
+          source: "bundle",
+          source_id: session.id,
+          source_package_id: bundleId,
+          granted_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,package_id" }
+      );
+
+      // Generate license key for each package
+      const licenseKey = await generateUniqueLicenseKey();
+      const keyHash = hashLicenseKey(licenseKey);
+
+      await supabaseAdmin.from("licenses").upsert(
+        {
+          user_id: userId,
+          package_id: packageId,
+          license_key: licenseKey,
+          license_key_hash: keyHash,
+          license_type: "standard",
+          max_devices: 2,
+          status: "active",
+          source: "purchase",
+          source_id: session.id,
+        },
+        { onConflict: "user_id,package_id" }
+      );
+    }
+
+    // Mark contact as customer
+    if (email) {
+      await supabaseAdmin
+        .from("email_contacts")
+        .upsert(
+          { email, is_customer: true, source: "package_bundle_purchase" },
+          { onConflict: "email" }
+        );
+
+      // Send purchase email
+      try {
+        const { data: bundle } = await supabaseAdmin
+          .from("package_bundles")
+          .select("name")
+          .eq("id", bundleId)
+          .single();
+
+        const { data: packages } = await supabaseAdmin
+          .from("packages")
+          .select("name")
+          .in("id", packageIds);
+
+        const packageNames = (packages || []).map((p: { name: string }) => p.name).join(", ");
+
+        const { data: userProfile } = await supabaseAdmin
+          .from("users")
+          .select("full_name")
+          .eq("id", userId)
+          .single();
+
+        await sendPackagePurchaseEmail({
+          to: email,
+          firstName: userProfile?.full_name?.split(" ")[0],
+          packageName: `${bundle?.name || "Package Bundle"} (${packageNames})`,
+          licenseKey: "See your licenses page for individual keys",
+          licenseType: "standard",
+          maxDevices: 2,
+        });
+      } catch (emailErr) {
+        console.error("Failed to send package bundle purchase email:", emailErr);
+      }
+    }
+
+    console.log("Package bundle purchase processed:", {
+      bundleId,
+      userId,
+      packageCount: packageIds.length,
+    });
+  } catch (err) {
+    console.error("Error processing package bundle purchase:", err);
   }
 }

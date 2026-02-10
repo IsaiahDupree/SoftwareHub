@@ -32,7 +32,7 @@ npm run test:coverage  # Coverage report
 ### Access URLs
 
 - **App:** http://localhost:2828
-- **Supabase Studio:** http://localhost:28323
+- **Supabase Studio:** http://localhost:54823
 - **Email Inbox (Mailpit):** http://localhost:28324
 
 ---
@@ -44,9 +44,9 @@ npm run test:coverage  # Coverage report
 ### Local Supabase URLs (Portal28 Custom Ports)
 | Service | URL |
 |---------|-----|
-| **API** | http://127.0.0.1:28321 |
+| **API** | http://127.0.0.1:54821 |
 | **Database** | postgresql://postgres:postgres@127.0.0.1:28322/postgres |
-| **Studio** | http://127.0.0.1:28323 |
+| **Studio** | http://127.0.0.1:54823 |
 | **Mailpit** | http://127.0.0.1:28324 |
 
 ### Check Supabase Status
@@ -61,7 +61,7 @@ supabase start
 
 ### Environment Variables (.env.local)
 The `.env.local` file is already configured for local Supabase:
-- `NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:28321`
+- `NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54821`
 - Uses demo anon/service keys for local development
 
 **DO NOT change these to production URLs during development.**

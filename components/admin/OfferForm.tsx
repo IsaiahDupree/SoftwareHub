@@ -148,7 +148,8 @@ export default function OfferForm({
           >
             <option value="membership">Membership</option>
             <option value="course">Course</option>
-            <option value="bundle">Bundle</option>
+            <option value="bundle">Bundle (Courses)</option>
+            <option value="package_bundle">Package Bundle</option>
             <option value="order_bump">Order Bump</option>
           </select>
         </div>
@@ -241,13 +242,15 @@ export default function OfferForm({
           rows={6}
         />
         <p className="text-xs text-gray-500 mt-1">
-          membership: {"{"} tier, interval {"}"} | course: {"{"} courseSlug {"}"} | bundle: {"{"} courseIds: ["uuid1", "uuid2"] {"}"}
+          membership: {"{"} tier, interval {"}"} | course: {"{"} courseSlug {"}"} | bundle: {"{"} courseIds: ["uuid1"] {"}"} | package_bundle: {"{"} bundleId: "uuid" {"}"}
         </p>
       </div>
 
-      {kind === "bundle" && (
+      {(kind === "bundle" || kind === "package_bundle") && (
         <div>
-          <label className="block text-sm font-medium mb-1">Stripe Price ID (Required for Bundles)</label>
+          <label className="block text-sm font-medium mb-1">
+            Stripe Price ID {kind === "package_bundle" ? "(set on bundle record)" : "(Required for Bundles)"}
+          </label>
           <input
             type="text"
             value={stripePriceId}
@@ -257,7 +260,9 @@ export default function OfferForm({
             required={kind === "bundle"}
           />
           <p className="text-xs text-gray-500 mt-1">
-            Create a bundle product in Stripe Dashboard and paste the price ID here
+            {kind === "package_bundle"
+              ? "Optional here — the price is usually set on the package_bundles record. Only needed for offer-level override."
+              : "Create a bundle product in Stripe Dashboard and paste the price ID here"}
           </p>
         </div>
       )}

@@ -53,6 +53,7 @@ const adminNavItems = [
   { title: "Course Studio", href: "/admin/studio", icon: BookOpen },
   { title: "Courses", href: "/admin/courses", icon: GraduationCap },
   { title: "Packages", href: "/admin/packages", icon: Package },
+  { title: "Pkg Bundles", href: "/admin/package-bundles", icon: FolderOpen },
   { title: "Licenses", href: "/admin/licenses", icon: KeyRound },
   { title: "Offers", href: "/admin/offers", icon: Package },
   { title: "Community", href: "/admin/community", icon: Users },
