@@ -539,7 +539,8 @@
       "description": "Implement GET /api/packages/[slug]/download - get download URL",
       "acceptance_criteria": ["Auth required", "Checks entitlement", "Returns signed URL (1hr expiry)", "Logs download attempt", "Returns file info"],
       "file_hint": "app/api/packages/[slug]/download/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-050",
@@ -549,7 +550,8 @@
       "description": "Create user downloads page",
       "acceptance_criteria": ["Lists packages user can download", "Shows current version and release date", "Download button with file size", "Release notes preview"],
       "file_hint": "app/app/downloads/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-051",
@@ -559,7 +561,8 @@
       "description": "Create download card component",
       "acceptance_criteria": ["Package icon and name", "Version badge", "Release notes expandable", "Download button with size", "Changelog link"],
       "file_hint": "components/downloads/DownloadCard.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-052",
@@ -568,7 +571,8 @@
       "priority": 52,
       "description": "Add beta channel toggle to downloads",
       "acceptance_criteria": ["Toggle to show beta releases", "Warning about beta stability", "Different badge for beta versions"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-053",
@@ -578,7 +582,8 @@
       "description": "Create package changelog page",
       "acceptance_criteria": ["Lists all releases", "Shows release notes", "Breaking changes highlighted", "Download links per version"],
       "file_hint": "app/app/packages/[slug]/changelog/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-054",
