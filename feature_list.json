@@ -495,7 +495,8 @@
       "description": "Create user licenses and devices page",
       "acceptance_criteria": ["Lists user's licenses", "Shows package name, status, device count", "Expand to show devices", "Deactivate device button"],
       "file_hint": "app/app/licenses/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-046",
@@ -505,7 +506,8 @@
       "description": "Create license card component",
       "acceptance_criteria": ["Shows package icon and name", "License key with copy button (masked)", "Status badge", "Device count progress bar"],
       "file_hint": "components/licenses/LicenseCard.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-047",
@@ -515,7 +517,8 @@
       "description": "Create device list component",
       "acceptance_criteria": ["Shows device name and type icon", "Last seen timestamp", "Deactivate button with confirmation", "Current device indicator"],
       "file_hint": "components/licenses/DeviceList.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-048",
@@ -525,7 +528,8 @@
       "description": "Add reveal license key functionality",
       "acceptance_criteria": ["Click to reveal full key", "Auto-hide after 30 seconds", "Copy to clipboard button", "Security confirmation"],
       "file_hint": "components/licenses/LicenseKey.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-049",
