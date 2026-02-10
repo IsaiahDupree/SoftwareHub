@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +15,7 @@ interface ProductCardProps {
   description: string | null;
   status?: string;
   version?: string | null;
+  packageId?: string;
 }
 
 const typeLabels: Record<string, string> = {
@@ -42,8 +44,29 @@ export function ProductCard({
   description,
   status,
   version,
+  packageId,
 }: ProductCardProps) {
   const TypeIcon = typeIcons[type] || Package;
+  const [ssoLoading, setSsoLoading] = useState(false);
+
+  async function handleOpenCloudApp() {
+    if (!packageId) return;
+    setSsoLoading(true);
+    try {
+      const res = await fetch("/api/cloud-sso/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ package_id: packageId }),
+      });
+      if (!res.ok) throw new Error("SSO failed");
+      const data = await res.json();
+      window.open(data.redirect_url, "_blank");
+    } catch {
+      // Silently fail
+    } finally {
+      setSsoLoading(false);
+    }
+  }
 
   function getActionButton() {
     switch (type) {
@@ -58,9 +81,14 @@ export function ProductCard({
         );
       case "CLOUD_APP":
         return (
-          <Button size="sm" variant="outline">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleOpenCloudApp}
+            disabled={ssoLoading}
+          >
             <ExternalLink className="mr-2 h-4 w-4" />
-            Open App
+            {ssoLoading ? "Loading..." : "Open App"}
           </Button>
         );
       case "course":

@@ -147,6 +147,7 @@ export default async function MyProductsPage({
                 description={pkg.description}
                 status={pkg.status}
                 version={pkg.current_version}
+                packageId={pkg.id}
               />
             ))}
         </div>

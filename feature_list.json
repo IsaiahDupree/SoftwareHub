@@ -768,7 +768,8 @@
       "description": "Create SSO token generation for cloud apps",
       "acceptance_criteria": ["Short-lived token (5 min)", "Contains user_id, entitlements", "Signed JWT", "One-time use flag"],
       "file_hint": "lib/cloud-sso/token.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-071",
@@ -778,7 +779,8 @@
       "description": "Implement POST /api/cloud-sso/generate - get SSO URL",
       "acceptance_criteria": ["Auth required", "Checks entitlement", "Generates token", "Returns redirect URL with token"],
       "file_hint": "app/api/cloud-sso/generate/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-072",
@@ -788,7 +790,8 @@
       "description": "Implement POST /api/cloud-sso/verify - verify SSO token",
       "acceptance_criteria": ["Called by cloud apps", "Verifies token signature", "Checks not expired or used", "Returns user info and entitlements"],
       "file_hint": "app/api/cloud-sso/verify/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-073",
@@ -797,7 +800,8 @@
       "priority": 73,
       "description": "Add 'Open Cloud App' button to products",
       "acceptance_criteria": ["Shows for CLOUD_APP type", "Generates SSO token on click", "Redirects to cloud app URL", "Shows loading state"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-074",
