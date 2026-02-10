@@ -888,7 +888,8 @@
       "description": "Unit tests for license key generation",
       "acceptance_criteria": ["Format validation", "Uniqueness test", "Character set test"],
       "file_hint": "__tests__/lib/licenses/generate.test.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-082",
@@ -898,7 +899,8 @@
       "description": "Unit tests for JWT token generation/validation",
       "acceptance_criteria": ["Token generation", "Token validation", "Expiration handling", "Invalid token handling"],
       "file_hint": "__tests__/lib/licenses/token.test.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-083",
@@ -908,7 +910,8 @@
       "description": "Integration tests for license activation API",
       "acceptance_criteria": ["Successful activation", "Invalid key handling", "Device limit exceeded", "Already activated device"],
       "file_hint": "__tests__/api/licenses/activate.test.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-084",
@@ -918,7 +921,8 @@
       "description": "Integration tests for license validation API",
       "acceptance_criteria": ["Valid token", "Expired token", "Device mismatch", "Revoked license"],
       "file_hint": "__tests__/api/licenses/validate.test.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-085",
@@ -928,7 +932,8 @@
       "description": "Integration tests for package CRUD APIs",
       "acceptance_criteria": ["Create package", "Update package", "Delete package", "Auth checks"],
       "file_hint": "__tests__/api/admin/packages.test.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-086",
@@ -938,7 +943,8 @@
       "description": "E2E test for package purchase flow",
       "acceptance_criteria": ["View package", "Checkout", "License created", "Download available"],
       "file_hint": "e2e/package-purchase.spec.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-087",
@@ -948,7 +954,8 @@
       "description": "E2E test for license activation flow",
       "acceptance_criteria": ["Get license key", "Call activate API", "Validate token", "Deactivate device"],
       "file_hint": "e2e/license-activation.spec.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-088",
