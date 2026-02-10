@@ -593,7 +593,8 @@
       "description": "Implement GET /api/activity - get activity feed",
       "acceptance_criteria": ["Returns public + user's private activities", "Pagination with cursor", "Filter by type and package", "Pinned items first"],
       "file_hint": "app/api/activity/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-055",
@@ -603,7 +604,8 @@
       "description": "Create user activity feed page",
       "acceptance_criteria": ["Infinite scroll activity list", "Filter tabs (All/Releases/Status/Announcements)", "Package filter dropdown", "Pinned items section"],
       "file_hint": "app/app/activity/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-056",
@@ -613,7 +615,8 @@
       "description": "Create activity card component",
       "acceptance_criteria": ["Type-specific icon", "Title and body", "Package reference", "Action button if applicable", "Relative timestamp"],
       "file_hint": "components/activity/ActivityCard.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-057",
@@ -623,7 +626,8 @@
       "description": "Auto-create activity on new release",
       "acceptance_criteria": ["Trigger when release published", "Activity type 'release'", "Include version and notes summary", "Link to download"],
       "file_hint": "lib/activity/create.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-058",
@@ -633,7 +637,8 @@
       "description": "Auto-create activity on status change",
       "acceptance_criteria": ["Trigger when package status changes", "Activity type 'status_change'", "Include status message", "Different titles for up/down"],
       "file_hint": "lib/activity/create.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-059",
@@ -643,7 +648,8 @@
       "description": "Create admin announcement form",
       "acceptance_criteria": ["Title, body (markdown), package selector", "Pinned toggle", "Expiration date optional", "Preview before publish"],
       "file_hint": "app/admin/activity/new/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-060",

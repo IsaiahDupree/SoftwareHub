@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase/server';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import { CreateReleaseSchema } from '@/lib/validation/packages';
+import { createReleaseActivity } from '@/lib/activity/create';
 import { z } from 'zod';
 
 async function checkAdmin(supabase: ReturnType<typeof supabaseServer>) {
@@ -73,16 +74,21 @@ export async function POST(request: Request) {
 
     // Create activity feed entry for published releases
     if (validated.is_published) {
-      await supabaseAdmin.from('activity_feed').insert({
-        type: 'release',
-        package_id: validated.package_id,
-        release_id: release.id,
-        title: `Version ${validated.version} released`,
-        body: validated.release_notes
-          ? validated.release_notes.substring(0, 500)
-          : null,
-        is_public: true,
-      });
+      const { data: pkg } = await supabaseAdmin
+        .from('packages')
+        .select('name, slug')
+        .eq('id', validated.package_id)
+        .single();
+
+      if (pkg) {
+        await createReleaseActivity(
+          validated.package_id,
+          pkg.name,
+          pkg.slug,
+          validated.version,
+          validated.release_notes
+        );
+      }
     }
 
     return NextResponse.json({ release }, { status: 201 });
