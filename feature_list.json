@@ -451,7 +451,8 @@
       "description": "Implement GET /api/admin/licenses - list all licenses",
       "acceptance_criteria": ["Admin auth required", "Pagination support", "Filter by user, package, status", "Search by email or key"],
       "file_hint": "app/api/admin/licenses/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-042",
@@ -461,7 +462,8 @@
       "description": "Implement PUT /api/admin/licenses/[id] - update license",
       "acceptance_criteria": ["Admin auth required", "Can suspend/revoke", "Can adjust max_devices", "Can extend expiration"],
       "file_hint": "app/api/admin/licenses/[id]/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-043",
@@ -471,7 +473,8 @@
       "description": "Create admin licenses list page",
       "acceptance_criteria": ["Search by email or license key", "Table with user, package, status, devices", "Suspend/revoke actions", "View details link"],
       "file_hint": "app/admin/licenses/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-044",
@@ -481,7 +484,8 @@
       "description": "Create admin license detail page",
       "acceptance_criteria": ["Shows full license info", "Lists all device activations", "Activation history", "Actions: suspend, revoke, adjust limits"],
       "file_hint": "app/admin/licenses/[id]/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-045",
