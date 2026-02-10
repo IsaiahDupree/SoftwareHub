@@ -12,7 +12,8 @@
       "description": "Create packages table migration with all fields (name, slug, type, status, pricing, media)",
       "acceptance_criteria": ["Table created with correct schema", "RLS policies configured", "Indexes on slug, type, status"],
       "file_hint": "supabase/migrations/0050_packages.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-002",
@@ -22,7 +23,8 @@
       "description": "Create package_releases table migration for version history",
       "acceptance_criteria": ["Table created with FK to packages", "Unique constraint on package_id + version", "Version parser trigger"],
       "file_hint": "supabase/migrations/0051_package_releases.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-003",
@@ -32,7 +34,8 @@
       "description": "Create licenses table migration for license keys",
       "acceptance_criteria": ["Table created with FKs to users and packages", "Unique license_key constraint", "license_key_hash for secure lookups"],
       "file_hint": "supabase/migrations/0052_licenses.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-004",
@@ -42,7 +45,8 @@
       "description": "Create device_activations table migration",
       "acceptance_criteria": ["Table created with FK to licenses", "Unique constraint on license_id + device_id_hash", "activation_token field"],
       "file_hint": "supabase/migrations/0053_device_activations.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-005",
@@ -52,7 +56,8 @@
       "description": "Create package_entitlements table migration",
       "acceptance_criteria": ["Table created with FKs", "Unique constraint on user_id + package_id", "RLS for user access"],
       "file_hint": "supabase/migrations/0054_package_entitlements.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-006",
@@ -62,7 +67,8 @@
       "description": "Create activity_feed table migration",
       "acceptance_criteria": ["Table created with type enum", "Indexes on type, package_id, created_at", "RLS for public/private"],
       "file_hint": "supabase/migrations/0055_activity_feed.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-007",
@@ -72,7 +78,8 @@
       "description": "Create status_checks table migration",
       "acceptance_criteria": ["Table created with FK to packages", "Index on checked_at", "Status enum constraint"],
       "file_hint": "supabase/migrations/0056_status_checks.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-008",
@@ -82,7 +89,8 @@
       "description": "Create download_logs table migration",
       "acceptance_criteria": ["Table created with FKs", "Indexes on user_id, package_id", "Track download progress"],
       "file_hint": "supabase/migrations/0057_download_logs.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-009",
@@ -92,7 +100,8 @@
       "description": "Create database helper functions (generate_license_key, has_package_access)",
       "acceptance_criteria": ["generate_license_key returns XXXX-XXXX-XXXX-XXXX format", "has_package_access checks entitlements", "Functions are SECURITY DEFINER"],
       "file_hint": "supabase/migrations/0058_functions.sql",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-010",
@@ -101,7 +110,8 @@
       "priority": 10,
       "description": "Apply all migrations to local Supabase and verify schema",
       "acceptance_criteria": ["All migrations apply without errors", "Tables visible in Supabase Studio", "RLS policies active"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-011",
@@ -111,7 +121,8 @@
       "description": "Create TypeScript types for packages, releases, licenses",
       "acceptance_criteria": ["Package interface with all fields", "Release interface", "License interface", "Types exported from lib/types/"],
       "file_hint": "lib/types/packages.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-012",
@@ -121,7 +132,8 @@
       "description": "Create Zod schemas for package validation",
       "acceptance_criteria": ["CreatePackageSchema", "UpdatePackageSchema", "CreateReleaseSchema", "Validation for all required fields"],
       "file_hint": "lib/validation/packages.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-013",
@@ -131,7 +143,8 @@
       "description": "Implement GET /api/packages - list all published packages",
       "acceptance_criteria": ["Returns published packages", "Includes status and current version", "Optional type filter", "Pagination support"],
       "file_hint": "app/api/packages/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-014",
@@ -141,7 +154,8 @@
       "description": "Implement GET /api/packages/[slug] - get package details",
       "acceptance_criteria": ["Returns full package details", "Includes features, requirements", "Shows user entitlement if logged in", "404 if not found or not published"],
       "file_hint": "app/api/packages/[slug]/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-015",
@@ -151,7 +165,8 @@
       "description": "Implement GET /api/packages/[slug]/releases - get release history",
       "acceptance_criteria": ["Returns releases ordered by version DESC", "Includes release notes", "Filters by channel optional", "Only published, non-yanked releases"],
       "file_hint": "app/api/packages/[slug]/releases/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-016",
@@ -161,7 +176,8 @@
       "description": "Implement POST /api/admin/packages - create package",
       "acceptance_criteria": ["Admin auth required", "Validates with Zod schema", "Creates package in DB", "Returns created package"],
       "file_hint": "app/api/admin/packages/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-017",
@@ -171,7 +187,8 @@
       "description": "Implement PUT /api/admin/packages/[id] - update package",
       "acceptance_criteria": ["Admin auth required", "Validates with Zod", "Updates package", "Handles published_at on publish"],
       "file_hint": "app/api/admin/packages/[id]/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-018",
@@ -181,7 +198,8 @@
       "description": "Implement DELETE /api/admin/packages/[id] - soft delete package",
       "acceptance_criteria": ["Admin auth required", "Sets is_published to false", "Keeps data for reference", "Returns success"],
       "file_hint": "app/api/admin/packages/[id]/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-019",
@@ -191,7 +209,8 @@
       "description": "Implement POST /api/admin/releases - create release",
       "acceptance_criteria": ["Admin auth required", "Validates version format", "Sets is_current flag correctly", "Creates activity feed entry"],
       "file_hint": "app/api/admin/releases/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-020",
@@ -201,7 +220,8 @@
       "description": "Implement POST /api/admin/releases/[id]/upload - upload binary",
       "acceptance_criteria": ["Accepts multipart form data", "Uploads to R2/S3", "Calculates SHA256 checksum", "Updates release with URL and size"],
       "file_hint": "app/api/admin/releases/[id]/upload/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-021",
