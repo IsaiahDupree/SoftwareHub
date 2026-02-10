@@ -659,7 +659,8 @@
       "description": "Implement GET /api/status - get all package statuses",
       "acceptance_criteria": ["Returns all package statuses", "Includes last check time", "Response time if available", "Overall status calculation"],
       "file_hint": "app/api/status/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-061",
@@ -669,7 +670,8 @@
       "description": "Create status dashboard component",
       "acceptance_criteria": ["Shows all packages with status dots", "Green/yellow/red indicators", "Last checked timestamp", "Click for details"],
       "file_hint": "components/status/StatusDashboard.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-062",
@@ -678,7 +680,8 @@
       "priority": 62,
       "description": "Add status overview to user dashboard",
       "acceptance_criteria": ["Shows owned packages status", "Alert if any degraded/down", "Quick link to full status"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-063",
@@ -688,7 +691,8 @@
       "description": "Implement admin status check trigger",
       "acceptance_criteria": ["POST /api/admin/status-check", "Calls package status_check_url", "Records result in status_checks", "Updates package status"],
       "file_hint": "app/api/admin/status-check/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-064",
@@ -698,7 +702,8 @@
       "description": "Create automated status check cron job",
       "acceptance_criteria": ["Vercel cron every 5 minutes", "Checks all packages with status_check_url", "Creates status_change activity on change"],
       "file_hint": "app/api/cron/status-check/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-065",
