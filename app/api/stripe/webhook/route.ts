@@ -23,11 +23,17 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+    const kind = session.metadata?.kind || null;
+
+    // Handle package purchases
+    if (kind === "package") {
+      await handlePackagePurchase(session);
+    }
+
     const courseId = session.metadata?.course_id;
     const bundleCourseIds = session.metadata?.bundle_course_ids
       ? JSON.parse(session.metadata.bundle_course_ids)
       : null;
-    const kind = session.metadata?.kind || null;
     const event_id = session.metadata?.event_id || session.metadata?.meta_event_id;
     const userId = session.metadata?.user_id || null;
     const email = session.customer_details?.email || null;
@@ -308,4 +314,71 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ received: true });
+}
+
+async function handlePackagePurchase(session: Stripe.Checkout.Session) {
+  const packageId = session.metadata?.package_id;
+  const userId = session.metadata?.user_id;
+  const email = session.customer_details?.email;
+
+  if (!packageId || !userId) {
+    console.error("Package purchase missing metadata:", { packageId, userId });
+    return;
+  }
+
+  try {
+    // Create package entitlement
+    await supabaseAdmin.from("package_entitlements").upsert(
+      {
+        user_id: userId,
+        package_id: packageId,
+        has_access: true,
+        access_level: "full",
+        source: "purchase",
+        source_id: session.id,
+        granted_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,package_id" }
+    );
+
+    // Generate license key
+    const { generateUniqueLicenseKey } = await import("@/lib/licenses/generate");
+    const { hashLicenseKey } = await import("@/lib/licenses/hash");
+
+    const licenseKey = await generateUniqueLicenseKey();
+    const keyHash = hashLicenseKey(licenseKey);
+
+    await supabaseAdmin.from("licenses").upsert(
+      {
+        user_id: userId,
+        package_id: packageId,
+        license_key: licenseKey,
+        license_key_hash: keyHash,
+        license_type: "standard",
+        max_devices: 2,
+        status: "active",
+        source: "purchase",
+        source_id: session.id,
+      },
+      { onConflict: "user_id,package_id" }
+    );
+
+    // Mark contact as customer
+    if (email) {
+      await supabaseAdmin
+        .from("email_contacts")
+        .upsert(
+          { email, is_customer: true, source: "package_purchase" },
+          { onConflict: "email" }
+        );
+    }
+
+    console.log("Package purchase processed:", {
+      packageId,
+      userId,
+      licenseKey: `****-****-****-${licenseKey.split("-")[3]}`,
+    });
+  } catch (err) {
+    console.error("Error processing package purchase:", err);
+  }
 }

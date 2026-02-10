@@ -308,7 +308,8 @@
       "description": "Create Stripe product and price for packages",
       "acceptance_criteria": ["API to create Stripe product", "Links stripe_product_id to package", "Creates price with price_cents"],
       "file_hint": "lib/stripe/packages.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-029",
@@ -318,7 +319,8 @@
       "description": "Create package checkout session endpoint",
       "acceptance_criteria": ["POST /api/packages/[slug]/checkout", "Creates Stripe checkout session", "Includes package metadata", "Returns checkout URL"],
       "file_hint": "app/api/packages/[slug]/checkout/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-030",
@@ -328,7 +330,8 @@
       "description": "Handle package purchase in Stripe webhook",
       "acceptance_criteria": ["Detect package purchase from metadata", "Create package_entitlement", "Create license with generated key", "Send confirmation email"],
       "file_hint": "app/api/stripe/webhook/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-031",
@@ -338,7 +341,8 @@
       "description": "Create license key generation utility",
       "acceptance_criteria": ["Generates XXXX-XXXX-XXXX-XXXX format", "Uses crypto secure random", "Excludes confusing characters (0, O, 1, I, L)", "Checks uniqueness"],
       "file_hint": "lib/licenses/generate.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-032",
@@ -348,7 +352,8 @@
       "description": "Create license key hashing utility",
       "acceptance_criteria": ["SHA256 hash of license key", "Consistent hashing for lookups", "Used for license_key_hash field"],
       "file_hint": "lib/licenses/hash.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-033",
@@ -358,7 +363,8 @@
       "description": "Create JWT activation token generation",
       "acceptance_criteria": ["JWT with 30-day expiry", "Contains license_id, package_id, device_id_hash, user_id", "Signed with LICENSE_JWT_SECRET", "Uses HS256"],
       "file_hint": "lib/licenses/token.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-034",
@@ -368,7 +374,8 @@
       "description": "Create JWT activation token validation",
       "acceptance_criteria": ["Verifies JWT signature", "Checks expiration", "Returns decoded payload", "Throws on invalid token"],
       "file_hint": "lib/licenses/token.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-035",
@@ -378,7 +385,8 @@
       "description": "Implement POST /api/licenses/activate - activate license on device",
       "acceptance_criteria": ["Accepts license_key and device info", "Validates license exists and is active", "Checks device limit not exceeded", "Creates device_activation", "Returns activation token"],
       "file_hint": "app/api/licenses/activate/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-036",
@@ -388,7 +396,8 @@
       "description": "Implement POST /api/licenses/validate - validate activation token",
       "acceptance_criteria": ["Accepts activation_token and device_id", "Verifies JWT", "Checks license still active", "Updates last_validated_at", "Returns validity status"],
       "file_hint": "app/api/licenses/validate/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-037",
@@ -398,7 +407,8 @@
       "description": "Implement POST /api/licenses/deactivate - deactivate device",
       "acceptance_criteria": ["Accepts token or license_id + device_id", "Marks device as inactive", "Decrements active_devices count", "Returns remaining devices"],
       "file_hint": "app/api/licenses/deactivate/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-038",
@@ -408,7 +418,8 @@
       "description": "Implement GET /api/licenses - get user's licenses",
       "acceptance_criteria": ["Auth required", "Returns user's licenses with package info", "Includes device count", "Masks license key (XXXX-XXXX-XXXX-****)"],
       "file_hint": "app/api/licenses/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-039",
@@ -418,7 +429,8 @@
       "description": "Add rate limiting to license endpoints",
       "acceptance_criteria": ["10/hour per license for activate", "100/hour per device for validate", "Returns 429 when exceeded", "Uses Redis or in-memory store"],
       "file_hint": "lib/security/rateLimit.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-040",
@@ -428,7 +440,8 @@
       "description": "Handle license expiration in validation",
       "acceptance_criteria": ["Check expires_at in validate", "Return expired status", "Grace period of 7 days", "Different error code for expired"],
       "file_hint": "app/api/licenses/validate/route.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-041",
