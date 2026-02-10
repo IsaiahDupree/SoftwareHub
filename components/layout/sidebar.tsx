@@ -20,6 +20,9 @@ import {
   Megaphone,
   FolderOpen,
   Award,
+  KeyRound,
+  Download,
+  Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -47,6 +50,8 @@ const adminNavItems = [
   { title: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { title: "Course Studio", href: "/admin/studio", icon: BookOpen },
   { title: "Courses", href: "/admin/courses", icon: GraduationCap },
+  { title: "Packages", href: "/admin/packages", icon: Package },
+  { title: "Licenses", href: "/admin/licenses", icon: KeyRound },
   { title: "Offers", href: "/admin/offers", icon: Package },
   { title: "Community", href: "/admin/community", icon: Users },
   { title: "Email Programs", href: "/admin/email-programs", icon: Mail },
@@ -56,7 +61,11 @@ const adminNavItems = [
 
 const appNavItems = [
   { title: "Dashboard", href: "/app", icon: LayoutDashboard },
+  { title: "My Products", href: "/app/products", icon: Package },
   { title: "My Courses", href: "/app/courses", icon: GraduationCap },
+  { title: "Downloads", href: "/app/downloads", icon: Download },
+  { title: "Licenses", href: "/app/licenses", icon: KeyRound },
+  { title: "Activity", href: "/app/activity", icon: Activity },
   { title: "Certificates", href: "/app/certificates", icon: Award },
   { title: "Community", href: "/app/community", icon: Users },
 ];

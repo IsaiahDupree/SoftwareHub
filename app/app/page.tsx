@@ -9,7 +9,8 @@ import { Progress } from "@/components/ui/progress";
 import { PageHeader } from "@/components/ui/page-header";
 import { StatCard, StatCardGrid } from "@/components/ui/stat-card";
 import { EmptyState } from "@/components/ui/empty-state";
-import { BookOpen, Users, MessageSquare, Trophy, ArrowRight } from "lucide-react";
+import { BookOpen, Users, MessageSquare, Trophy, ArrowRight, Package, KeyRound, Download } from "lucide-react";
+import { StatusOverview } from "@/components/status/StatusOverview";
 
 export default async function AppHome() {
   const supabase = supabaseServer();
@@ -50,15 +51,30 @@ export default async function AppHome() {
   // Create progress map for courses
   const progressMap = new Map(allProgress.map(p => [p.course_id, p.completion_percent]));
 
+  // Get software product stats
+  const { data: packageEnts } = await supabase
+    .from("package_entitlements")
+    .select("package_id")
+    .eq("user_id", user.id)
+    .eq("has_access", true);
+
+  const { data: licenses } = await supabase
+    .from("licenses")
+    .select("id, active_devices")
+    .eq("user_id", user.id)
+    .eq("status", "active");
+
+  const totalDevices = (licenses ?? []).reduce((sum, l) => sum + (l.active_devices || 0), 0);
+
   return (
     <div className="space-y-6">
-      {/* Welcome Header - Using reusable component */}
+      {/* Welcome Header */}
       <PageHeader
         title="Welcome back!"
-        description="Continue your learning journey with Portal28."
+        description="Your courses and software products dashboard."
       />
 
-      {/* Quick Stats - Using reusable StatCard components */}
+      {/* Quick Stats */}
       <StatCardGrid columns={4}>
         <StatCard
           title="My Courses"
@@ -67,21 +83,21 @@ export default async function AppHome() {
           icon={BookOpen}
         />
         <StatCard
-          title="Community"
-          value="Active"
-          description="Member status"
-          icon={Users}
+          title="Products"
+          value={packageEnts?.length || 0}
+          description="Software packages"
+          icon={Package}
         />
         <StatCard
-          title="Forums"
-          value={0}
-          description="New discussions"
-          icon={MessageSquare}
+          title="Licenses"
+          value={licenses?.length || 0}
+          description={`${totalDevices} active devices`}
+          icon={KeyRound}
         />
         <StatCard
           title="Progress"
           value={`${overallProgress}%`}
-          description="Overall completion"
+          description="Course completion"
           icon={Trophy}
         />
       </StatCardGrid>
@@ -147,41 +163,44 @@ export default async function AppHome() {
       {/* Quick Links */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="hover:border-primary transition-colors">
-          <Link href="/app/community">
+          <Link href="/app/products">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Community
+                <Package className="h-5 w-5" />
+                My Products
               </CardTitle>
-              <CardDescription>Connect with other members</CardDescription>
+              <CardDescription>Courses, software, and cloud apps</CardDescription>
             </CardHeader>
           </Link>
         </Card>
 
         <Card className="hover:border-primary transition-colors">
-          <Link href="/app/community/forums">
+          <Link href="/app/downloads">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="h-5 w-5" />
-                Forums
+                <Download className="h-5 w-5" />
+                Downloads
               </CardTitle>
-              <CardDescription>Join discussions and get help</CardDescription>
+              <CardDescription>Download your software packages</CardDescription>
             </CardHeader>
           </Link>
         </Card>
 
         <Card className="hover:border-primary transition-colors">
-          <Link href="/app/community/resources">
+          <Link href="/app/licenses">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                Resources
+                <KeyRound className="h-5 w-5" />
+                Licenses & Devices
               </CardTitle>
-              <CardDescription>Templates, guides, and more</CardDescription>
+              <CardDescription>Manage activations and devices</CardDescription>
             </CardHeader>
           </Link>
         </Card>
       </div>
+
+      {/* Status Overview */}
+      <StatusOverview />
     </div>
   );
 }

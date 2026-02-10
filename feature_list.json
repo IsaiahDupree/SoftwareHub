@@ -712,8 +712,9 @@
       "priority": 65,
       "description": "Create user dashboard page",
       "acceptance_criteria": ["Welcome message", "Quick stats (products owned, active devices)", "Recent activity (last 5)", "Quick actions"],
-      "file_hint": "app/app/dashboard/page.tsx",
-      "passes": false
+      "file_hint": "app/app/page.tsx",
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-066",
@@ -723,7 +724,8 @@
       "description": "Create My Products page",
       "acceptance_criteria": ["Grid of owned products", "Filter: All/Courses/Local Agents/Cloud Apps", "Type badge on cards", "Access actions per type"],
       "file_hint": "app/app/products/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-067",
@@ -733,7 +735,8 @@
       "description": "Create product card component",
       "acceptance_criteria": ["Icon and name", "Type badge", "Status indicator", "Action button (Download/Open Cloud/Access Course)"],
       "file_hint": "components/products/ProductCard.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-068",
@@ -743,7 +746,8 @@
       "description": "Create package detail public page",
       "acceptance_criteria": ["Full package description", "Features list", "Requirements", "Screenshots gallery", "Purchase/download CTA"],
       "file_hint": "app/(public)/packages/[slug]/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-069",
@@ -752,8 +756,9 @@
       "priority": 69,
       "description": "Update navigation with new pages",
       "acceptance_criteria": ["Dashboard, My Products, Downloads in nav", "Courses link (inherited)", "Activity, Licenses & Devices", "Proper active states"],
-      "file_hint": "components/layout/AppNav.tsx",
-      "passes": false
+      "file_hint": "components/layout/sidebar.tsx",
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-070",
