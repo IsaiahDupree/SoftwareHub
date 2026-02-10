@@ -811,7 +811,8 @@
       "description": "Send email on package purchase with license key",
       "acceptance_criteria": ["Email template with license key", "Download instructions", "Getting started guide link", "Support contact"],
       "file_hint": "lib/email/sendPackagePurchaseEmail.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-075",
@@ -821,7 +822,8 @@
       "description": "Send email on new release for owned packages",
       "acceptance_criteria": ["Email to users with entitlement", "Release notes summary", "Download link", "Respects notification preferences"],
       "file_hint": "lib/email/sendNewReleaseEmail.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-076",
@@ -831,7 +833,8 @@
       "description": "Send email on license expiration warning",
       "acceptance_criteria": ["7 days before expiration", "Renewal instructions", "Current device count", "Support link"],
       "file_hint": "lib/email/sendLicenseExpirationEmail.ts",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-077",
@@ -841,7 +844,8 @@
       "description": "Add notification preferences to user settings",
       "acceptance_criteria": ["Toggle for new releases", "Toggle for status changes", "Per-package preferences option"],
       "file_hint": "app/app/settings/notifications/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-078",

@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { sendCapiPurchase } from "@/lib/meta/capi";
 import { sendCourseAccessEmail } from "@/lib/email/sendCourseAccessEmail";
+import { sendPackagePurchaseEmail } from "@/lib/email/sendPackagePurchaseEmail";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -371,6 +372,32 @@ async function handlePackagePurchase(session: Stripe.Checkout.Session) {
           { email, is_customer: true, source: "package_purchase" },
           { onConflict: "email" }
         );
+
+      // Send purchase confirmation email with license key
+      try {
+        const { data: pkg } = await supabaseAdmin
+          .from("packages")
+          .select("name")
+          .eq("id", packageId)
+          .single();
+
+        const { data: userProfile } = await supabaseAdmin
+          .from("users")
+          .select("full_name")
+          .eq("id", userId)
+          .single();
+
+        await sendPackagePurchaseEmail({
+          to: email,
+          firstName: userProfile?.full_name?.split(" ")[0],
+          packageName: pkg?.name || "Software Package",
+          licenseKey,
+          licenseType: "standard",
+          maxDevices: 2,
+        });
+      } catch (emailErr) {
+        console.error("Failed to send package purchase email:", emailErr);
+      }
     }
 
     console.log("Package purchase processed:", {

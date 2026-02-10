@@ -30,6 +30,9 @@ export async function GET(req: NextRequest) {
         email_on_announcement: true,
         email_on_course_update: true,
         in_app_notifications: true,
+        email_on_new_release: true,
+        email_on_status_change: true,
+        email_on_license_expiration: true,
       })
       .select()
       .single();
@@ -59,15 +62,21 @@ export async function PUT(req: NextRequest) {
     email_on_announcement,
     email_on_course_update,
     in_app_notifications,
+    email_on_new_release,
+    email_on_status_change,
+    email_on_license_expiration,
   } = body;
 
   // Build update object with only provided fields
-  const updateData: any = {};
+  const updateData: Record<string, boolean> = {};
   if (typeof email_on_comment === "boolean") updateData.email_on_comment = email_on_comment;
   if (typeof email_on_reply === "boolean") updateData.email_on_reply = email_on_reply;
   if (typeof email_on_announcement === "boolean") updateData.email_on_announcement = email_on_announcement;
   if (typeof email_on_course_update === "boolean") updateData.email_on_course_update = email_on_course_update;
   if (typeof in_app_notifications === "boolean") updateData.in_app_notifications = in_app_notifications;
+  if (typeof email_on_new_release === "boolean") updateData.email_on_new_release = email_on_new_release;
+  if (typeof email_on_status_change === "boolean") updateData.email_on_status_change = email_on_status_change;
+  if (typeof email_on_license_expiration === "boolean") updateData.email_on_license_expiration = email_on_license_expiration;
 
   if (Object.keys(updateData).length === 0) {
     return NextResponse.json(

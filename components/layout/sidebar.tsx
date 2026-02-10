@@ -23,6 +23,7 @@ import {
   KeyRound,
   Download,
   Activity,
+  Bell,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,7 @@ const appNavItems = [
   { title: "Activity", href: "/app/activity", icon: Activity },
   { title: "Certificates", href: "/app/certificates", icon: Award },
   { title: "Community", href: "/app/community", icon: Users },
+  { title: "Settings", href: "/app/settings/notifications", icon: Bell },
 ];
 
 export function Sidebar({ variant }: SidebarProps) {

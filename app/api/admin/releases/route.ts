@@ -3,6 +3,7 @@ import { supabaseServer } from '@/lib/supabase/server';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import { CreateReleaseSchema } from '@/lib/validation/packages';
 import { createReleaseActivity } from '@/lib/activity/create';
+import { notifyUsersOfNewRelease } from '@/lib/email/sendNewReleaseEmail';
 import { z } from 'zod';
 
 async function checkAdmin(supabase: ReturnType<typeof supabaseServer>) {
@@ -88,6 +89,16 @@ export async function POST(request: Request) {
           validated.version,
           validated.release_notes
         );
+
+        // Send email notifications to users with entitlement (async, don't block response)
+        notifyUsersOfNewRelease({
+          packageId: validated.package_id,
+          packageName: pkg.name,
+          packageSlug: pkg.slug,
+          version: validated.version,
+          releaseNotes: validated.release_notes || '',
+          channel: validated.channel || 'stable',
+        }).catch((err) => console.error('Failed to send release notifications:', err));
       }
     }
 
