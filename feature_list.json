@@ -855,7 +855,8 @@
       "description": "Create admin dashboard with package metrics",
       "acceptance_criteria": ["Total downloads", "Active licenses", "Revenue by package", "Active users graph"],
       "file_hint": "app/admin/dashboard/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-079",
@@ -865,7 +866,8 @@
       "description": "Add download analytics to package detail",
       "acceptance_criteria": ["Downloads over time chart", "Downloads by version", "Geographic distribution", "Device type breakdown"],
       "file_hint": "app/admin/packages/[id]/analytics/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-080",
@@ -875,7 +877,8 @@
       "description": "Add license analytics",
       "acceptance_criteria": ["Active vs total licenses", "Activation success rate", "Device utilization", "Expiring soon count"],
       "file_hint": "app/admin/analytics/licenses/page.tsx",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-10"
     },
     {
       "id": "sh-081",

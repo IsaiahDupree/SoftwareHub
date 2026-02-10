@@ -121,6 +121,11 @@ export default async function AdminPackagesPage() {
                       </td>
                       <td className="p-4 text-right space-x-2">
                         <Button variant="ghost" size="sm" asChild>
+                          <Link href={`/admin/packages/${pkg.id}/analytics`}>
+                            Analytics
+                          </Link>
+                        </Button>
+                        <Button variant="ghost" size="sm" asChild>
                           <Link href={`/admin/packages/${pkg.id}/releases`}>
                             Releases
                           </Link>

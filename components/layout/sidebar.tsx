@@ -49,6 +49,7 @@ const publicNavItems = [
 
 const adminNavItems = [
   { title: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { title: "Package Metrics", href: "/admin/dashboard", icon: Download },
   { title: "Course Studio", href: "/admin/studio", icon: BookOpen },
   { title: "Courses", href: "/admin/courses", icon: GraduationCap },
   { title: "Packages", href: "/admin/packages", icon: Package },
