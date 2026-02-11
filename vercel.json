@@ -5,6 +5,14 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
+  "functions": {
+    "app/api/stripe/webhook/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/cron/*/route.ts": {
+      "maxDuration": 60
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/automation-scheduler",
@@ -13,6 +21,14 @@
     {
       "path": "/api/cron/send-certificate-emails",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/license-expiration",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/status-check",
+      "schedule": "*/15 * * * *"
     }
   ],
   "headers": [
@@ -34,6 +50,10 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     }

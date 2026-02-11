@@ -1085,7 +1085,8 @@
       "description": "Production environment setup",
       "acceptance_criteria": ["Vercel deployment config", "Environment variables", "Domain configuration"],
       "file_hint": "vercel.json",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-101",
@@ -1094,7 +1095,8 @@
       "priority": 101,
       "description": "Production Supabase setup",
       "acceptance_criteria": ["Create production project", "Apply all migrations", "Configure RLS", "Set up backups"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-102",
@@ -1103,7 +1105,8 @@
       "priority": 102,
       "description": "Cloudflare R2 setup for binaries",
       "acceptance_criteria": ["R2 bucket created", "Access policies configured", "Signed URL generation", "CORS settings"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-103",
@@ -1112,7 +1115,8 @@
       "priority": 103,
       "description": "Production Stripe configuration",
       "acceptance_criteria": ["Live mode webhook", "Products created", "Pricing configured"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-104",
@@ -1230,7 +1234,8 @@
       "description": "API documentation",
       "acceptance_criteria": ["Document all endpoints", "Request/response examples", "Error codes"],
       "file_hint": "docs/API_SPECS.md",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-117",
@@ -1240,7 +1245,8 @@
       "description": "Local agent integration guide",
       "acceptance_criteria": ["How to call activate API", "Token storage guide", "Validation flow"],
       "file_hint": "docs/LOCAL_AGENT_INTEGRATION.md",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-118",
@@ -1250,7 +1256,8 @@
       "description": "Cloud app integration guide",
       "acceptance_criteria": ["SSO flow documentation", "Verify endpoint usage", "Session management"],
       "file_hint": "docs/CLOUD_APP_INTEGRATION.md",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-119",
@@ -1260,7 +1267,8 @@
       "description": "User help documentation",
       "acceptance_criteria": ["Getting started guide", "FAQ", "Troubleshooting"],
       "file_hint": "docs/USER_GUIDE.md",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-120",
@@ -1270,7 +1278,8 @@
       "description": "Admin documentation",
       "acceptance_criteria": ["Package management guide", "License management", "Analytics usage"],
       "file_hint": "docs/ADMIN_GUIDE.md",
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     }
   ]
 }
