@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Save, Loader2, Check, Video, FileText, Plus, Trash2, Eye, Lock } from "lucide-react";
+import { ArrowLeft, Save, Loader2, Check, Video, FileText, Plus, Trash2, Eye, Lock, Download, Package } from "lucide-react";
 import { MuxVideoUpload } from "@/components/admin/MuxVideoUpload";
 import { FileUpload } from "@/components/admin/FileUpload";
 
@@ -28,6 +28,8 @@ interface Lesson {
   video_url?: string;
   content_html?: string;
   downloads?: FileAttachment[];
+  package_id?: string;
+  download_instructions?: string;
   drip_type: string;
   drip_value?: string;
   is_published: boolean;
@@ -42,6 +44,16 @@ export function LessonEditor({ lesson: initialLesson, course }: { lesson: Lesson
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
+  const [packages, setPackages] = useState<{ id: string; name: string; slug: string }[]>([]);
+
+  useEffect(() => {
+    if (lesson.lesson_type === "download") {
+      fetch("/api/admin/packages")
+        .then((r) => r.json())
+        .then((d) => setPackages(d.packages || []))
+        .catch(() => {});
+    }
+  }, [lesson.lesson_type]);
 
   useEffect(() => {
     if (!hasChanges) return;
@@ -117,6 +129,50 @@ export function LessonEditor({ lesson: initialLesson, course }: { lesson: Lesson
               </CardContent>
             </Card>
           </>
+        )}
+
+        {lesson.lesson_type === "download" && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Download className="h-5 w-5" />
+                Software Download
+              </CardTitle>
+              <CardDescription>Link a software package to this lesson for students to download</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label>Package</Label>
+                <Select
+                  value={lesson.package_id || ""}
+                  onValueChange={(v) => updateLesson({ package_id: v || undefined })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a package" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packages.map((pkg) => (
+                      <SelectItem key={pkg.id} value={pkg.id}>
+                        <span className="flex items-center gap-2">
+                          <Package className="h-3 w-3" />
+                          {pkg.name}
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Download Instructions</Label>
+                <Textarea
+                  value={lesson.download_instructions || ""}
+                  onChange={(e) => updateLesson({ download_instructions: e.target.value })}
+                  placeholder="Instructions for downloading and installing the software..."
+                  className="min-h-[100px]"
+                />
+              </div>
+            </CardContent>
+          </Card>
         )}
 
         <Card>

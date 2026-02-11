@@ -36,6 +36,11 @@ export async function POST(req: Request) {
       await handlePackageBundlePurchase(session);
     }
 
+    // Handle referral attribution for any purchase type
+    if (session.metadata?.referral_code && session.metadata?.user_id) {
+      await handleReferralConversion(session);
+    }
+
     const courseId = session.metadata?.course_id;
     const bundleCourseIds = session.metadata?.bundle_course_ids
       ? JSON.parse(session.metadata.bundle_course_ids)
@@ -207,14 +212,15 @@ export async function POST(req: Request) {
     const userId = subscription.metadata?.user_id;
     const tier = subscription.metadata?.tier || "member";
     const stripeCustomerId = subscription.customer as string;
-    
+    const isPackageSub = subscription.metadata?.kind === "package_subscription";
+
     if (userId) {
       // Extract price details from subscription
       const priceData = subscription.items.data[0]?.price;
       const priceCents = priceData?.unit_amount || 0;
       const interval = priceData?.recurring?.interval || "month"; // 'month' or 'year'
 
-      await supabaseAdmin.from("subscriptions").upsert({
+      const subscriptionData: Record<string, unknown> = {
         user_id: userId,
         stripe_customer_id: stripeCustomerId,
         stripe_subscription_id: subscription.id,
@@ -228,27 +234,43 @@ export async function POST(req: Request) {
         cancel_at_period_end: subscription.cancel_at_period_end,
         canceled_at: subscription.canceled_at ? new Date(subscription.canceled_at * 1000).toISOString() : null,
         trial_start: subscription.trial_start ? new Date(subscription.trial_start * 1000).toISOString() : null,
-        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null
-      }, { onConflict: "stripe_subscription_id" });
+        trial_end: subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null,
+      };
 
-      // Create/update membership entitlement
+      if (isPackageSub && subscription.metadata?.tier_id) {
+        subscriptionData.package_subscription_tier_id = subscription.metadata.tier_id;
+      }
+
+      await supabaseAdmin.from("subscriptions").upsert(
+        subscriptionData,
+        { onConflict: "stripe_subscription_id" }
+      );
+
       if (subscription.status === "active" || subscription.status === "trialing") {
-        await supabaseAdmin.from("entitlements").upsert({
-          user_id: userId,
-          scope_type: "membership_tier",
-          scope_id: tier,
-          status: "active",
-          source: "stripe_membership",
-          starts_at: new Date(subscription.current_period_start * 1000).toISOString(),
-          ends_at: new Date(subscription.current_period_end * 1000).toISOString()
-        }, { onConflict: "user_id,scope_type,scope_id" });
+        // Handle package subscription: grant all-package entitlements
+        if (isPackageSub && subscription.metadata?.includes_all_packages === "true") {
+          await handlePackageSubscriptionActive(userId, subscription.id);
+        }
+
+        // Create/update membership entitlement (for course memberships)
+        if (!isPackageSub) {
+          await supabaseAdmin.from("entitlements").upsert({
+            user_id: userId,
+            scope_type: "membership_tier",
+            scope_id: tier,
+            status: "active",
+            source: "stripe_membership",
+            starts_at: new Date(subscription.current_period_start * 1000).toISOString(),
+            ends_at: new Date(subscription.current_period_end * 1000).toISOString()
+          }, { onConflict: "user_id,scope_type,scope_id" });
+        }
 
         // Log paywall conversion
         await supabaseAdmin.from("paywall_events").insert({
           user_id: userId,
           event_type: subscription.status === "trialing" ? "start_trial" : "subscribe",
-          paywall_type: "membership",
-          offer_tier: tier,
+          paywall_type: isPackageSub ? "package_subscription" : "membership",
+          offer_tier: isPackageSub ? (subscription.metadata?.tier_slug || "all-access") : tier,
           converted: true,
           source: "stripe_webhook"
         });
@@ -260,24 +282,32 @@ export async function POST(req: Request) {
     const subscription = event.data.object as Stripe.Subscription;
     const userId = subscription.metadata?.user_id;
     const tier = subscription.metadata?.tier || "member";
+    const isPackageSub = subscription.metadata?.kind === "package_subscription";
 
     // Update subscription status
     await supabaseAdmin
       .from("subscriptions")
-      .update({ 
+      .update({
         status: "canceled",
         canceled_at: new Date().toISOString()
       })
       .eq("stripe_subscription_id", subscription.id);
 
-    // Revoke membership entitlement
     if (userId) {
-      await supabaseAdmin
-        .from("entitlements")
-        .update({ status: "expired", ends_at: new Date().toISOString() })
-        .eq("user_id", userId)
-        .eq("scope_type", "membership_tier")
-        .eq("scope_id", tier);
+      // Revoke package subscription entitlements
+      if (isPackageSub) {
+        await handlePackageSubscriptionCanceled(userId, subscription.id);
+      }
+
+      // Revoke membership entitlement (for course memberships)
+      if (!isPackageSub) {
+        await supabaseAdmin
+          .from("entitlements")
+          .update({ status: "expired", ends_at: new Date().toISOString() })
+          .eq("user_id", userId)
+          .eq("scope_type", "membership_tier")
+          .eq("scope_id", tier);
+      }
     }
   }
 
@@ -534,5 +564,180 @@ async function handlePackageBundlePurchase(session: Stripe.Checkout.Session) {
     });
   } catch (err) {
     console.error("Error processing package bundle purchase:", err);
+  }
+}
+
+async function handlePackageSubscriptionActive(userId: string, subscriptionId: string) {
+  try {
+    // Get all published packages
+    const { data: packages } = await supabaseAdmin
+      .from("packages")
+      .select("id")
+      .eq("is_published", true);
+
+    if (!packages || packages.length === 0) return;
+
+    const { generateUniqueLicenseKey } = await import("@/lib/licenses/generate");
+    const { hashLicenseKey } = await import("@/lib/licenses/hash");
+
+    for (const pkg of packages) {
+      // Upsert entitlement for each package
+      await supabaseAdmin.from("package_entitlements").upsert(
+        {
+          user_id: userId,
+          package_id: pkg.id,
+          has_access: true,
+          access_level: "full",
+          source: "subscription",
+          source_id: subscriptionId,
+          granted_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,package_id" }
+      );
+
+      // Check if license already exists for this user+package
+      const { data: existingLicense } = await supabaseAdmin
+        .from("licenses")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("package_id", pkg.id)
+        .maybeSingle();
+
+      if (!existingLicense) {
+        const licenseKey = await generateUniqueLicenseKey();
+        const keyHash = hashLicenseKey(licenseKey);
+
+        await supabaseAdmin.from("licenses").insert({
+          user_id: userId,
+          package_id: pkg.id,
+          license_key: licenseKey,
+          license_key_hash: keyHash,
+          license_type: "standard",
+          max_devices: 3,
+          status: "active",
+          source: "subscription",
+          source_id: subscriptionId,
+        });
+      } else {
+        // Reactivate existing license if it was suspended/revoked
+        await supabaseAdmin
+          .from("licenses")
+          .update({ status: "active", source: "subscription", source_id: subscriptionId })
+          .eq("id", existingLicense.id)
+          .in("status", ["suspended", "revoked", "expired"]);
+      }
+    }
+
+    console.log("Package subscription activated:", { userId, packageCount: packages.length });
+  } catch (err) {
+    console.error("Error activating package subscription:", err);
+  }
+}
+
+async function handlePackageSubscriptionCanceled(userId: string, subscriptionId: string) {
+  try {
+    // Revoke all subscription-sourced package entitlements
+    await supabaseAdmin
+      .from("package_entitlements")
+      .update({ has_access: false, revoked_at: new Date().toISOString() })
+      .eq("user_id", userId)
+      .eq("source", "subscription")
+      .eq("source_id", subscriptionId);
+
+    // Suspend associated licenses
+    await supabaseAdmin
+      .from("licenses")
+      .update({
+        status: "suspended",
+        suspension_reason: "Subscription canceled",
+        suspended_at: new Date().toISOString(),
+      })
+      .eq("user_id", userId)
+      .eq("source", "subscription")
+      .eq("source_id", subscriptionId);
+
+    console.log("Package subscription canceled:", { userId, subscriptionId });
+  } catch (err) {
+    console.error("Error canceling package subscription:", err);
+  }
+}
+
+async function handleReferralConversion(session: Stripe.Checkout.Session) {
+  const referralCode = session.metadata?.referral_code;
+  const userId = session.metadata?.user_id;
+  const email = session.customer_details?.email;
+  const packageId = session.metadata?.package_id || null;
+  const amountCents = session.amount_total || 0;
+
+  if (!referralCode || !userId) return;
+
+  try {
+    // Look up the referral code
+    const { data: code } = await supabaseAdmin
+      .from("referral_codes")
+      .select("id, user_id, is_active")
+      .eq("code", referralCode)
+      .eq("is_active", true)
+      .single();
+
+    if (!code) return;
+
+    // Don't allow self-referrals
+    if (code.user_id === userId) return;
+
+    // Check for duplicate conversion (same referred user + same referrer)
+    const { data: existing } = await supabaseAdmin
+      .from("referral_conversions")
+      .select("id")
+      .eq("referrer_id", code.user_id)
+      .eq("referred_user_id", userId)
+      .maybeSingle();
+
+    if (existing) return; // Already converted
+
+    // Calculate reward (10% of purchase as credit)
+    const rewardPercent = 10;
+    const rewardAmount = Math.round(amountCents * rewardPercent / 100);
+
+    // Create conversion record
+    const { data: conversion } = await supabaseAdmin
+      .from("referral_conversions")
+      .insert({
+        referral_code_id: code.id,
+        referrer_id: code.user_id,
+        referred_user_id: userId,
+        referred_email: email,
+        package_id: packageId,
+        order_amount_cents: amountCents,
+        reward_type: "credit",
+        reward_amount: rewardAmount,
+        status: "qualified",
+      })
+      .select("id")
+      .single();
+
+    // Credit the referrer
+    if (conversion && rewardAmount > 0) {
+      await supabaseAdmin.from("referral_credits").insert({
+        user_id: code.user_id,
+        amount_cents: rewardAmount,
+        conversion_id: conversion.id,
+        description: `Referral reward: ${email || "new user"} purchased`,
+      });
+
+      // Mark conversion as rewarded
+      await supabaseAdmin
+        .from("referral_conversions")
+        .update({ status: "rewarded", reward_applied: true, rewarded_at: new Date().toISOString() })
+        .eq("id", conversion.id);
+    }
+
+    console.log("Referral conversion processed:", {
+      referrer: code.user_id,
+      referred: userId,
+      reward: rewardAmount,
+    });
+  } catch (err) {
+    console.error("Error processing referral conversion:", err);
   }
 }

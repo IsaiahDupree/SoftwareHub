@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Package } from "@/lib/types/packages";
 
@@ -34,12 +34,21 @@ export default function PackageForm({ package: pkg, mode }: PackageFormProps) {
     requirements: JSON.stringify(pkg?.requirements || {}, null, 2),
     documentation_url: pkg?.documentation_url || "",
     support_url: pkg?.support_url || "",
+    related_course_id: pkg?.related_course_id || "",
     is_published: pkg?.is_published || false,
     is_featured: pkg?.is_featured || false,
     sort_order: pkg?.sort_order?.toString() || "0",
   });
 
   const [featureInput, setFeatureInput] = useState("");
+  const [courses, setCourses] = useState<{ id: string; title: string; slug: string }[]>([]);
+
+  useEffect(() => {
+    fetch("/api/admin/courses")
+      .then((res) => res.json())
+      .then((data) => setCourses(data.courses || []))
+      .catch(() => {});
+  }, []);
 
   function handleChange(field: string, value: string | boolean) {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -103,6 +112,7 @@ export default function PackageForm({ package: pkg, mode }: PackageFormProps) {
       banner_url: formData.banner_url || null,
       features: formData.features,
       requirements: parsedRequirements,
+      related_course_id: formData.related_course_id || null,
       documentation_url: formData.documentation_url || null,
       support_url: formData.support_url || null,
       is_published: formData.is_published,
@@ -321,6 +331,31 @@ export default function PackageForm({ package: pkg, mode }: PackageFormProps) {
             onChange={(e) => handleChange("support_url", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
           />
+        </div>
+      </div>
+
+      {/* Related Course */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Related Course</h3>
+        <div>
+          <label className="block mb-1 font-medium text-sm">
+            Link to Course
+          </label>
+          <select
+            value={formData.related_course_id}
+            onChange={(e) => handleChange("related_course_id", e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          >
+            <option value="">None</option>
+            {courses.map((course) => (
+              <option key={course.id} value={course.id}>
+                {course.title} ({course.slug})
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-gray-500 mt-1">
+            Linking a course shows it on the package page and vice versa.
+          </p>
         </div>
       </div>
 

@@ -964,7 +964,8 @@
       "priority": 88,
       "description": "Bundle support - multiple packages in one purchase",
       "acceptance_criteria": ["Bundle product type", "Contains multiple packages", "Creates all entitlements", "Discount pricing"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-089",
@@ -973,7 +974,8 @@
       "priority": 89,
       "description": "Subscription tier with all packages access",
       "acceptance_criteria": ["Subscription product", "Grants all package entitlements", "Handles cancellation", "Renewal flow"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-090",
@@ -982,7 +984,8 @@
       "priority": 90,
       "description": "Trial/demo mode for packages",
       "acceptance_criteria": ["Time-limited trial (7 days)", "Trial license type", "Convert trial to paid", "One trial per user per package"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-091",
@@ -991,7 +994,8 @@
       "priority": 91,
       "description": "Promo codes for package discounts",
       "acceptance_criteria": ["Create promo codes", "Apply at checkout", "Usage limits", "Expiration dates"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-092",
@@ -1000,7 +1004,8 @@
       "priority": 92,
       "description": "Referral system for packages",
       "acceptance_criteria": ["Generate referral links", "Track conversions", "Credit/discount for referrer"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-093",
@@ -1009,7 +1014,8 @@
       "priority": 93,
       "description": "Link packages to related courses",
       "acceptance_criteria": ["related_course_id on packages", "Show course on package page", "Show package on course page", "Bundle pricing option"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-094",
@@ -1018,7 +1024,8 @@
       "priority": 94,
       "description": "Course includes software download",
       "acceptance_criteria": ["Lesson type: download", "Entitlement grants software access", "Download from within course"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-095",
@@ -1027,7 +1034,8 @@
       "priority": 95,
       "description": "Auto-generate setup lessons for packages",
       "acceptance_criteria": ["Installation guide template", "License activation guide", "Troubleshooting guide"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-096",
@@ -1036,7 +1044,8 @@
       "priority": 96,
       "description": "Mobile responsive design audit",
       "acceptance_criteria": ["All pages work on mobile", "Touch-friendly UI", "Responsive navigation"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-097",
@@ -1045,7 +1054,8 @@
       "priority": 97,
       "description": "Performance optimization",
       "acceptance_criteria": ["Page load under 2s", "API responses under 200ms", "Proper caching headers"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-098",
@@ -1054,7 +1064,8 @@
       "priority": 98,
       "description": "SEO optimization for package pages",
       "acceptance_criteria": ["Meta tags", "Structured data", "Sitemap inclusion"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-099",
@@ -1063,7 +1074,8 @@
       "priority": 99,
       "description": "Accessibility audit (WCAG 2.1)",
       "acceptance_criteria": ["Keyboard navigation", "Screen reader support", "Color contrast"],
-      "passes": false
+      "passes": true,
+      "implemented_at": "2026-02-11"
     },
     {
       "id": "sh-100",

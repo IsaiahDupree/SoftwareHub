@@ -1,10 +1,49 @@
 import { supabaseServer } from "@/lib/supabase/server";
+import { supabaseAdmin } from "@/lib/supabase/admin";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Monitor, Cloud, Package, Download } from "lucide-react";
+import { CheckCircle, Monitor, Cloud, Package, Download, Clock } from "lucide-react";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const supabase = supabaseServer();
+  const { data: pkg } = await supabase
+    .from("packages")
+    .select("name, tagline, description, icon_url, type")
+    .eq("slug", params.slug)
+    .eq("is_published", true)
+    .maybeSingle();
+
+  if (!pkg) {
+    return { title: "Package Not Found | SoftwareHub" };
+  }
+
+  const typeLabel = pkg.type === "LOCAL_AGENT" ? "Local Agent" : "Cloud App";
+  const description = pkg.tagline || pkg.description?.slice(0, 160) || `${pkg.name} - ${typeLabel}`;
+
+  return {
+    title: `${pkg.name} | SoftwareHub`,
+    description,
+    openGraph: {
+      title: `${pkg.name} - ${typeLabel}`,
+      description,
+      type: "website",
+      ...(pkg.icon_url ? { images: [{ url: pkg.icon_url, width: 256, height: 256, alt: pkg.name }] } : {}),
+    },
+    twitter: {
+      card: "summary",
+      title: `${pkg.name} | SoftwareHub`,
+      description,
+    },
+  };
+}
 
 export default async function PackageDetailPage({
   params,
@@ -26,6 +65,8 @@ export default async function PackageDetailPage({
   // Check if user has access
   const { data: { user } } = await supabase.auth.getUser();
   let hasAccess = false;
+  let trialAvailable = false;
+  let existingTrial: { expires_at: string; started_at: string } | null = null;
 
   if (user) {
     const { data: entitlement } = await supabase
@@ -37,6 +78,24 @@ export default async function PackageDetailPage({
       .maybeSingle();
 
     hasAccess = !!entitlement;
+
+    // Check trial availability
+    if (!hasAccess && pkg.trial_enabled) {
+      const { data: trial } = await supabaseAdmin
+        .from("package_trials")
+        .select("id, started_at, expires_at")
+        .eq("user_id", user.id)
+        .eq("package_id", pkg.id)
+        .maybeSingle();
+
+      if (trial) {
+        existingTrial = trial;
+      } else {
+        trialAvailable = true;
+      }
+    }
+  } else if (pkg.trial_enabled) {
+    trialAvailable = true; // Show trial CTA to prompt sign-in
   }
 
   // Get current release info
@@ -47,6 +106,18 @@ export default async function PackageDetailPage({
     .eq("is_current", true)
     .eq("channel", "stable")
     .maybeSingle();
+
+  // Get related course
+  let relatedCourse: { id: string; title: string; slug: string; description: string | null } | null = null;
+  if (pkg.related_course_id) {
+    const { data: course } = await supabase
+      .from("courses")
+      .select("id, title, slug, description")
+      .eq("id", pkg.related_course_id)
+      .eq("is_published", true)
+      .maybeSingle();
+    relatedCourse = course;
+  }
 
   const features = pkg.features || [];
   const requirements = pkg.requirements || {};
@@ -94,15 +165,45 @@ export default async function PackageDetailPage({
                 </Link>
               </Button>
             ) : pkg.price_cents ? (
-              <form action={`/api/packages/${pkg.slug}/checkout`} method="POST">
-                <Button type="submit" size="lg">
-                  Purchase for ${(pkg.price_cents / 100).toFixed(2)}
-                </Button>
-              </form>
+              <>
+                <form action={`/api/packages/${pkg.slug}/checkout`} method="POST">
+                  <Button type="submit" size="lg">
+                    Purchase for ${(pkg.price_cents / 100).toFixed(2)}
+                  </Button>
+                </form>
+                {trialAvailable && (
+                  <Button variant="outline" size="lg" asChild>
+                    <Link href={user ? `/api/packages/${pkg.slug}/trial` : `/login?next=/packages/${pkg.slug}`}>
+                      <Clock className="mr-2 h-4 w-4" />
+                      Start {pkg.trial_days || 7}-Day Trial
+                    </Link>
+                  </Button>
+                )}
+                {existingTrial && new Date(existingTrial.expires_at) > new Date() && (
+                  <Badge variant="secondary" className="text-sm px-3 py-1">
+                    Trial expires {new Date(existingTrial.expires_at).toLocaleDateString()}
+                  </Badge>
+                )}
+                {existingTrial && new Date(existingTrial.expires_at) <= new Date() && (
+                  <Badge variant="destructive" className="text-sm px-3 py-1">
+                    Trial expired
+                  </Badge>
+                )}
+              </>
             ) : (
-              <Badge variant="secondary" className="text-base px-4 py-2">
-                Coming Soon
-              </Badge>
+              <>
+                <Badge variant="secondary" className="text-base px-4 py-2">
+                  Coming Soon
+                </Badge>
+                {trialAvailable && (
+                  <Button variant="outline" size="lg" asChild>
+                    <Link href={user ? `/api/packages/${pkg.slug}/trial` : `/login?next=/packages/${pkg.slug}`}>
+                      <Clock className="mr-2 h-4 w-4" />
+                      Start {pkg.trial_days || 7}-Day Trial
+                    </Link>
+                  </Button>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -168,6 +269,28 @@ export default async function PackageDetailPage({
 
         {/* Sidebar */}
         <div className="space-y-6">
+          {/* Related Course */}
+          {relatedCourse && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Related Course</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Link
+                  href={`/courses/${relatedCourse.slug}`}
+                  className="block p-3 rounded-lg border hover:border-blue-300 hover:bg-blue-50/50 transition-colors"
+                >
+                  <p className="font-medium text-sm">{relatedCourse.title}</p>
+                  {relatedCourse.description && (
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                      {relatedCourse.description}
+                    </p>
+                  )}
+                </Link>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Requirements */}
           {Object.keys(requirements).length > 0 && (
             <Card>

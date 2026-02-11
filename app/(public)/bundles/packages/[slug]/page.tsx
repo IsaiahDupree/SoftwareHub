@@ -6,6 +6,37 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Package, Download, Layers } from "lucide-react";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const supabase = supabaseServer();
+  const { data: bundle } = await supabase
+    .from("package_bundles")
+    .select("name, description, badge")
+    .eq("slug", params.slug)
+    .eq("is_published", true)
+    .maybeSingle();
+
+  if (!bundle) {
+    return { title: "Bundle Not Found | SoftwareHub" };
+  }
+
+  const description = bundle.description || `${bundle.name} - Package Bundle`;
+
+  return {
+    title: `${bundle.name} | SoftwareHub`,
+    description,
+    openGraph: {
+      title: bundle.name,
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default async function PackageBundleDetailPage({
   params,
