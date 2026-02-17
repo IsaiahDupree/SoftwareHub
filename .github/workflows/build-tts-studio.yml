@@ -1,0 +1,21 @@
+name: Build TTS Studio
+
+on:
+  push:
+    tags:
+      - 'tts-studio-v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g. 1.0.0)'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  build:
+    uses: ./.github/workflows/electron-build-template.yml
+    with:
+      package-name: electron-tts-studio
+      app-name: TTS Studio
+      tag-prefix: tts-studio
+    secrets: inherit

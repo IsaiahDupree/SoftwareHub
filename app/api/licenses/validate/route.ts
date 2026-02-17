@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import { validateActivationToken } from '@/lib/licenses/token';
 import { checkRateLimit } from '@/lib/security/rateLimit';
+import { checkForFraud, recordFraudAlert } from '@/lib/licenses/fraud';
 import { z } from 'zod';
 
 export const runtime = 'nodejs';
@@ -107,16 +108,38 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const ipAddress = req.headers.get('x-forwarded-for')?.split(',')[0] || req.ip || null;
+
     // Update last_validated_at
     await supabaseAdmin
       .from('device_activations')
       .update({
         last_validated_at: new Date().toISOString(),
         last_seen_at: new Date().toISOString(),
-        last_ip_address: req.headers.get('x-forwarded-for')?.split(',')[0] || req.ip || null,
+        last_ip_address: ipAddress,
       })
       .eq('license_id', payload.lid)
       .eq('device_id_hash', deviceHash);
+
+    // Fraud detection (non-blocking — runs after response data is ready)
+    checkForFraud(license.id, ipAddress, validated.device_id).then(async (fraudResult) => {
+      if (fraudResult.suspicious) {
+        await recordFraudAlert({
+          license_id: license.id,
+          user_id: license.user_id ?? null,
+          alert_type: fraudResult.action === 'block' ? 'ip_abuse' : 'rapid_activations',
+          risk_score: fraudResult.riskScore,
+          details: {
+            reasons: fraudResult.reasons,
+            action: fraudResult.action,
+            device_id: validated.device_id,
+          },
+          ip_address: ipAddress,
+        });
+      }
+    }).catch((err) => {
+      console.error('[validate] Fraud check error (non-fatal):', err);
+    });
 
     return NextResponse.json({
       valid: true,
