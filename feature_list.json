@@ -10,7 +10,11 @@
       "category": "critical",
       "priority": 1,
       "description": "Create packages table migration with all fields (name, slug, type, status, pricing, media)",
-      "acceptance_criteria": ["Table created with correct schema", "RLS policies configured", "Indexes on slug, type, status"],
+      "acceptance_criteria": [
+        "Table created with correct schema",
+        "RLS policies configured",
+        "Indexes on slug, type, status"
+      ],
       "file_hint": "supabase/migrations/0050_packages.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -21,7 +25,11 @@
       "category": "critical",
       "priority": 2,
       "description": "Create package_releases table migration for version history",
-      "acceptance_criteria": ["Table created with FK to packages", "Unique constraint on package_id + version", "Version parser trigger"],
+      "acceptance_criteria": [
+        "Table created with FK to packages",
+        "Unique constraint on package_id + version",
+        "Version parser trigger"
+      ],
       "file_hint": "supabase/migrations/0051_package_releases.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -32,7 +40,11 @@
       "category": "critical",
       "priority": 3,
       "description": "Create licenses table migration for license keys",
-      "acceptance_criteria": ["Table created with FKs to users and packages", "Unique license_key constraint", "license_key_hash for secure lookups"],
+      "acceptance_criteria": [
+        "Table created with FKs to users and packages",
+        "Unique license_key constraint",
+        "license_key_hash for secure lookups"
+      ],
       "file_hint": "supabase/migrations/0052_licenses.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -43,7 +55,11 @@
       "category": "critical",
       "priority": 4,
       "description": "Create device_activations table migration",
-      "acceptance_criteria": ["Table created with FK to licenses", "Unique constraint on license_id + device_id_hash", "activation_token field"],
+      "acceptance_criteria": [
+        "Table created with FK to licenses",
+        "Unique constraint on license_id + device_id_hash",
+        "activation_token field"
+      ],
       "file_hint": "supabase/migrations/0053_device_activations.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -54,7 +70,11 @@
       "category": "critical",
       "priority": 5,
       "description": "Create package_entitlements table migration",
-      "acceptance_criteria": ["Table created with FKs", "Unique constraint on user_id + package_id", "RLS for user access"],
+      "acceptance_criteria": [
+        "Table created with FKs",
+        "Unique constraint on user_id + package_id",
+        "RLS for user access"
+      ],
       "file_hint": "supabase/migrations/0054_package_entitlements.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -65,7 +85,11 @@
       "category": "high",
       "priority": 6,
       "description": "Create activity_feed table migration",
-      "acceptance_criteria": ["Table created with type enum", "Indexes on type, package_id, created_at", "RLS for public/private"],
+      "acceptance_criteria": [
+        "Table created with type enum",
+        "Indexes on type, package_id, created_at",
+        "RLS for public/private"
+      ],
       "file_hint": "supabase/migrations/0055_activity_feed.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -76,7 +100,11 @@
       "category": "high",
       "priority": 7,
       "description": "Create status_checks table migration",
-      "acceptance_criteria": ["Table created with FK to packages", "Index on checked_at", "Status enum constraint"],
+      "acceptance_criteria": [
+        "Table created with FK to packages",
+        "Index on checked_at",
+        "Status enum constraint"
+      ],
       "file_hint": "supabase/migrations/0056_status_checks.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -87,7 +115,11 @@
       "category": "high",
       "priority": 8,
       "description": "Create download_logs table migration",
-      "acceptance_criteria": ["Table created with FKs", "Indexes on user_id, package_id", "Track download progress"],
+      "acceptance_criteria": [
+        "Table created with FKs",
+        "Indexes on user_id, package_id",
+        "Track download progress"
+      ],
       "file_hint": "supabase/migrations/0057_download_logs.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -98,7 +130,11 @@
       "category": "high",
       "priority": 9,
       "description": "Create database helper functions (generate_license_key, has_package_access)",
-      "acceptance_criteria": ["generate_license_key returns XXXX-XXXX-XXXX-XXXX format", "has_package_access checks entitlements", "Functions are SECURITY DEFINER"],
+      "acceptance_criteria": [
+        "generate_license_key returns XXXX-XXXX-XXXX-XXXX format",
+        "has_package_access checks entitlements",
+        "Functions are SECURITY DEFINER"
+      ],
       "file_hint": "supabase/migrations/0058_functions.sql",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -109,7 +145,11 @@
       "category": "medium",
       "priority": 10,
       "description": "Apply all migrations to local Supabase and verify schema",
-      "acceptance_criteria": ["All migrations apply without errors", "Tables visible in Supabase Studio", "RLS policies active"],
+      "acceptance_criteria": [
+        "All migrations apply without errors",
+        "Tables visible in Supabase Studio",
+        "RLS policies active"
+      ],
       "passes": true,
       "implemented_at": "2026-02-10"
     },
@@ -119,7 +159,12 @@
       "category": "critical",
       "priority": 11,
       "description": "Create TypeScript types for packages, releases, licenses",
-      "acceptance_criteria": ["Package interface with all fields", "Release interface", "License interface", "Types exported from lib/types/"],
+      "acceptance_criteria": [
+        "Package interface with all fields",
+        "Release interface",
+        "License interface",
+        "Types exported from lib/types/"
+      ],
       "file_hint": "lib/types/packages.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -130,7 +175,12 @@
       "category": "critical",
       "priority": 12,
       "description": "Create Zod schemas for package validation",
-      "acceptance_criteria": ["CreatePackageSchema", "UpdatePackageSchema", "CreateReleaseSchema", "Validation for all required fields"],
+      "acceptance_criteria": [
+        "CreatePackageSchema",
+        "UpdatePackageSchema",
+        "CreateReleaseSchema",
+        "Validation for all required fields"
+      ],
       "file_hint": "lib/validation/packages.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -141,7 +191,12 @@
       "category": "critical",
       "priority": 13,
       "description": "Implement GET /api/packages - list all published packages",
-      "acceptance_criteria": ["Returns published packages", "Includes status and current version", "Optional type filter", "Pagination support"],
+      "acceptance_criteria": [
+        "Returns published packages",
+        "Includes status and current version",
+        "Optional type filter",
+        "Pagination support"
+      ],
       "file_hint": "app/api/packages/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -152,7 +207,12 @@
       "category": "critical",
       "priority": 14,
       "description": "Implement GET /api/packages/[slug] - get package details",
-      "acceptance_criteria": ["Returns full package details", "Includes features, requirements", "Shows user entitlement if logged in", "404 if not found or not published"],
+      "acceptance_criteria": [
+        "Returns full package details",
+        "Includes features, requirements",
+        "Shows user entitlement if logged in",
+        "404 if not found or not published"
+      ],
       "file_hint": "app/api/packages/[slug]/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -163,7 +223,12 @@
       "category": "high",
       "priority": 15,
       "description": "Implement GET /api/packages/[slug]/releases - get release history",
-      "acceptance_criteria": ["Returns releases ordered by version DESC", "Includes release notes", "Filters by channel optional", "Only published, non-yanked releases"],
+      "acceptance_criteria": [
+        "Returns releases ordered by version DESC",
+        "Includes release notes",
+        "Filters by channel optional",
+        "Only published, non-yanked releases"
+      ],
       "file_hint": "app/api/packages/[slug]/releases/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -174,7 +239,12 @@
       "category": "critical",
       "priority": 16,
       "description": "Implement POST /api/admin/packages - create package",
-      "acceptance_criteria": ["Admin auth required", "Validates with Zod schema", "Creates package in DB", "Returns created package"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Validates with Zod schema",
+        "Creates package in DB",
+        "Returns created package"
+      ],
       "file_hint": "app/api/admin/packages/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -185,7 +255,12 @@
       "category": "critical",
       "priority": 17,
       "description": "Implement PUT /api/admin/packages/[id] - update package",
-      "acceptance_criteria": ["Admin auth required", "Validates with Zod", "Updates package", "Handles published_at on publish"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Validates with Zod",
+        "Updates package",
+        "Handles published_at on publish"
+      ],
       "file_hint": "app/api/admin/packages/[id]/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -196,7 +271,12 @@
       "category": "high",
       "priority": 18,
       "description": "Implement DELETE /api/admin/packages/[id] - soft delete package",
-      "acceptance_criteria": ["Admin auth required", "Sets is_published to false", "Keeps data for reference", "Returns success"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Sets is_published to false",
+        "Keeps data for reference",
+        "Returns success"
+      ],
       "file_hint": "app/api/admin/packages/[id]/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -207,7 +287,12 @@
       "category": "critical",
       "priority": 19,
       "description": "Implement POST /api/admin/releases - create release",
-      "acceptance_criteria": ["Admin auth required", "Validates version format", "Sets is_current flag correctly", "Creates activity feed entry"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Validates version format",
+        "Sets is_current flag correctly",
+        "Creates activity feed entry"
+      ],
       "file_hint": "app/api/admin/releases/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -218,7 +303,12 @@
       "category": "high",
       "priority": 20,
       "description": "Implement POST /api/admin/releases/[id]/upload - upload binary",
-      "acceptance_criteria": ["Accepts multipart form data", "Uploads to R2/S3", "Calculates SHA256 checksum", "Updates release with URL and size"],
+      "acceptance_criteria": [
+        "Accepts multipart form data",
+        "Uploads to R2/S3",
+        "Calculates SHA256 checksum",
+        "Updates release with URL and size"
+      ],
       "file_hint": "app/api/admin/releases/[id]/upload/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -229,7 +319,12 @@
       "category": "critical",
       "priority": 21,
       "description": "Create admin packages list page with table view",
-      "acceptance_criteria": ["Lists all packages (published and unpublished)", "Shows type badge, status, version", "Edit/delete actions", "Create button"],
+      "acceptance_criteria": [
+        "Lists all packages (published and unpublished)",
+        "Shows type badge, status, version",
+        "Edit/delete actions",
+        "Create button"
+      ],
       "file_hint": "app/admin/packages/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -240,7 +335,12 @@
       "category": "critical",
       "priority": 22,
       "description": "Create package create/edit form component",
-      "acceptance_criteria": ["Form with all package fields", "Type selector (LOCAL_AGENT/CLOUD_APP)", "Features array editor", "Requirements JSON editor"],
+      "acceptance_criteria": [
+        "Form with all package fields",
+        "Type selector (LOCAL_AGENT/CLOUD_APP)",
+        "Features array editor",
+        "Requirements JSON editor"
+      ],
       "file_hint": "components/admin/PackageForm.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -251,7 +351,12 @@
       "category": "high",
       "priority": 23,
       "description": "Create admin package create page",
-      "acceptance_criteria": ["Uses PackageForm component", "Submits to POST /api/admin/packages", "Redirects to edit page on success", "Shows validation errors"],
+      "acceptance_criteria": [
+        "Uses PackageForm component",
+        "Submits to POST /api/admin/packages",
+        "Redirects to edit page on success",
+        "Shows validation errors"
+      ],
       "file_hint": "app/admin/packages/new/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -262,7 +367,12 @@
       "category": "high",
       "priority": 24,
       "description": "Create admin package edit page",
-      "acceptance_criteria": ["Loads existing package data", "Uses PackageForm component", "Submits to PUT /api/admin/packages/[id]", "Shows success message"],
+      "acceptance_criteria": [
+        "Loads existing package data",
+        "Uses PackageForm component",
+        "Submits to PUT /api/admin/packages/[id]",
+        "Shows success message"
+      ],
       "file_hint": "app/admin/packages/[id]/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -273,7 +383,12 @@
       "category": "high",
       "priority": 25,
       "description": "Create admin releases management page",
-      "acceptance_criteria": ["Lists releases for package", "Shows version, channel, downloads", "Upload new release form", "Set as current toggle"],
+      "acceptance_criteria": [
+        "Lists releases for package",
+        "Shows version, channel, downloads",
+        "Upload new release form",
+        "Set as current toggle"
+      ],
       "file_hint": "app/admin/packages/[id]/releases/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -284,7 +399,12 @@
       "category": "high",
       "priority": 26,
       "description": "Create release upload form with progress",
-      "acceptance_criteria": ["Version input with validation", "Channel selector", "File upload with progress bar", "Release notes markdown editor"],
+      "acceptance_criteria": [
+        "Version input with validation",
+        "Channel selector",
+        "File upload with progress bar",
+        "Release notes markdown editor"
+      ],
       "file_hint": "components/admin/ReleaseUploadForm.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -295,7 +415,12 @@
       "category": "medium",
       "priority": 27,
       "description": "Add icon and screenshot upload to package form",
-      "acceptance_criteria": ["Icon upload with preview", "Multiple screenshot upload", "Drag and drop support", "Delete uploaded images"],
+      "acceptance_criteria": [
+        "Icon upload with preview",
+        "Multiple screenshot upload",
+        "Drag and drop support",
+        "Delete uploaded images"
+      ],
       "file_hint": "components/admin/ImageUpload.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -306,7 +431,11 @@
       "category": "critical",
       "priority": 28,
       "description": "Create Stripe product and price for packages",
-      "acceptance_criteria": ["API to create Stripe product", "Links stripe_product_id to package", "Creates price with price_cents"],
+      "acceptance_criteria": [
+        "API to create Stripe product",
+        "Links stripe_product_id to package",
+        "Creates price with price_cents"
+      ],
       "file_hint": "lib/stripe/packages.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -317,7 +446,12 @@
       "category": "critical",
       "priority": 29,
       "description": "Create package checkout session endpoint",
-      "acceptance_criteria": ["POST /api/packages/[slug]/checkout", "Creates Stripe checkout session", "Includes package metadata", "Returns checkout URL"],
+      "acceptance_criteria": [
+        "POST /api/packages/[slug]/checkout",
+        "Creates Stripe checkout session",
+        "Includes package metadata",
+        "Returns checkout URL"
+      ],
       "file_hint": "app/api/packages/[slug]/checkout/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -328,7 +462,12 @@
       "category": "critical",
       "priority": 30,
       "description": "Handle package purchase in Stripe webhook",
-      "acceptance_criteria": ["Detect package purchase from metadata", "Create package_entitlement", "Create license with generated key", "Send confirmation email"],
+      "acceptance_criteria": [
+        "Detect package purchase from metadata",
+        "Create package_entitlement",
+        "Create license with generated key",
+        "Send confirmation email"
+      ],
       "file_hint": "app/api/stripe/webhook/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -339,7 +478,12 @@
       "category": "critical",
       "priority": 31,
       "description": "Create license key generation utility",
-      "acceptance_criteria": ["Generates XXXX-XXXX-XXXX-XXXX format", "Uses crypto secure random", "Excludes confusing characters (0, O, 1, I, L)", "Checks uniqueness"],
+      "acceptance_criteria": [
+        "Generates XXXX-XXXX-XXXX-XXXX format",
+        "Uses crypto secure random",
+        "Excludes confusing characters (0, O, 1, I, L)",
+        "Checks uniqueness"
+      ],
       "file_hint": "lib/licenses/generate.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -350,7 +494,11 @@
       "category": "critical",
       "priority": 32,
       "description": "Create license key hashing utility",
-      "acceptance_criteria": ["SHA256 hash of license key", "Consistent hashing for lookups", "Used for license_key_hash field"],
+      "acceptance_criteria": [
+        "SHA256 hash of license key",
+        "Consistent hashing for lookups",
+        "Used for license_key_hash field"
+      ],
       "file_hint": "lib/licenses/hash.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -361,7 +509,12 @@
       "category": "critical",
       "priority": 33,
       "description": "Create JWT activation token generation",
-      "acceptance_criteria": ["JWT with 30-day expiry", "Contains license_id, package_id, device_id_hash, user_id", "Signed with LICENSE_JWT_SECRET", "Uses HS256"],
+      "acceptance_criteria": [
+        "JWT with 30-day expiry",
+        "Contains license_id, package_id, device_id_hash, user_id",
+        "Signed with LICENSE_JWT_SECRET",
+        "Uses HS256"
+      ],
       "file_hint": "lib/licenses/token.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -372,7 +525,12 @@
       "category": "critical",
       "priority": 34,
       "description": "Create JWT activation token validation",
-      "acceptance_criteria": ["Verifies JWT signature", "Checks expiration", "Returns decoded payload", "Throws on invalid token"],
+      "acceptance_criteria": [
+        "Verifies JWT signature",
+        "Checks expiration",
+        "Returns decoded payload",
+        "Throws on invalid token"
+      ],
       "file_hint": "lib/licenses/token.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -383,7 +541,13 @@
       "category": "critical",
       "priority": 35,
       "description": "Implement POST /api/licenses/activate - activate license on device",
-      "acceptance_criteria": ["Accepts license_key and device info", "Validates license exists and is active", "Checks device limit not exceeded", "Creates device_activation", "Returns activation token"],
+      "acceptance_criteria": [
+        "Accepts license_key and device info",
+        "Validates license exists and is active",
+        "Checks device limit not exceeded",
+        "Creates device_activation",
+        "Returns activation token"
+      ],
       "file_hint": "app/api/licenses/activate/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -394,7 +558,13 @@
       "category": "critical",
       "priority": 36,
       "description": "Implement POST /api/licenses/validate - validate activation token",
-      "acceptance_criteria": ["Accepts activation_token and device_id", "Verifies JWT", "Checks license still active", "Updates last_validated_at", "Returns validity status"],
+      "acceptance_criteria": [
+        "Accepts activation_token and device_id",
+        "Verifies JWT",
+        "Checks license still active",
+        "Updates last_validated_at",
+        "Returns validity status"
+      ],
       "file_hint": "app/api/licenses/validate/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -405,7 +575,12 @@
       "category": "high",
       "priority": 37,
       "description": "Implement POST /api/licenses/deactivate - deactivate device",
-      "acceptance_criteria": ["Accepts token or license_id + device_id", "Marks device as inactive", "Decrements active_devices count", "Returns remaining devices"],
+      "acceptance_criteria": [
+        "Accepts token or license_id + device_id",
+        "Marks device as inactive",
+        "Decrements active_devices count",
+        "Returns remaining devices"
+      ],
       "file_hint": "app/api/licenses/deactivate/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -416,7 +591,12 @@
       "category": "high",
       "priority": 38,
       "description": "Implement GET /api/licenses - get user's licenses",
-      "acceptance_criteria": ["Auth required", "Returns user's licenses with package info", "Includes device count", "Masks license key (XXXX-XXXX-XXXX-****)"],
+      "acceptance_criteria": [
+        "Auth required",
+        "Returns user's licenses with package info",
+        "Includes device count",
+        "Masks license key (XXXX-XXXX-XXXX-****)"
+      ],
       "file_hint": "app/api/licenses/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -427,7 +607,12 @@
       "category": "high",
       "priority": 39,
       "description": "Add rate limiting to license endpoints",
-      "acceptance_criteria": ["10/hour per license for activate", "100/hour per device for validate", "Returns 429 when exceeded", "Uses Redis or in-memory store"],
+      "acceptance_criteria": [
+        "10/hour per license for activate",
+        "100/hour per device for validate",
+        "Returns 429 when exceeded",
+        "Uses Redis or in-memory store"
+      ],
       "file_hint": "lib/security/rateLimit.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -438,7 +623,12 @@
       "category": "medium",
       "priority": 40,
       "description": "Handle license expiration in validation",
-      "acceptance_criteria": ["Check expires_at in validate", "Return expired status", "Grace period of 7 days", "Different error code for expired"],
+      "acceptance_criteria": [
+        "Check expires_at in validate",
+        "Return expired status",
+        "Grace period of 7 days",
+        "Different error code for expired"
+      ],
       "file_hint": "app/api/licenses/validate/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -449,7 +639,12 @@
       "category": "high",
       "priority": 41,
       "description": "Implement GET /api/admin/licenses - list all licenses",
-      "acceptance_criteria": ["Admin auth required", "Pagination support", "Filter by user, package, status", "Search by email or key"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Pagination support",
+        "Filter by user, package, status",
+        "Search by email or key"
+      ],
       "file_hint": "app/api/admin/licenses/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -460,7 +655,12 @@
       "category": "high",
       "priority": 42,
       "description": "Implement PUT /api/admin/licenses/[id] - update license",
-      "acceptance_criteria": ["Admin auth required", "Can suspend/revoke", "Can adjust max_devices", "Can extend expiration"],
+      "acceptance_criteria": [
+        "Admin auth required",
+        "Can suspend/revoke",
+        "Can adjust max_devices",
+        "Can extend expiration"
+      ],
       "file_hint": "app/api/admin/licenses/[id]/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -471,7 +671,12 @@
       "category": "medium",
       "priority": 43,
       "description": "Create admin licenses list page",
-      "acceptance_criteria": ["Search by email or license key", "Table with user, package, status, devices", "Suspend/revoke actions", "View details link"],
+      "acceptance_criteria": [
+        "Search by email or license key",
+        "Table with user, package, status, devices",
+        "Suspend/revoke actions",
+        "View details link"
+      ],
       "file_hint": "app/admin/licenses/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -482,7 +687,12 @@
       "category": "medium",
       "priority": 44,
       "description": "Create admin license detail page",
-      "acceptance_criteria": ["Shows full license info", "Lists all device activations", "Activation history", "Actions: suspend, revoke, adjust limits"],
+      "acceptance_criteria": [
+        "Shows full license info",
+        "Lists all device activations",
+        "Activation history",
+        "Actions: suspend, revoke, adjust limits"
+      ],
       "file_hint": "app/admin/licenses/[id]/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -493,7 +703,12 @@
       "category": "critical",
       "priority": 45,
       "description": "Create user licenses and devices page",
-      "acceptance_criteria": ["Lists user's licenses", "Shows package name, status, device count", "Expand to show devices", "Deactivate device button"],
+      "acceptance_criteria": [
+        "Lists user's licenses",
+        "Shows package name, status, device count",
+        "Expand to show devices",
+        "Deactivate device button"
+      ],
       "file_hint": "app/app/licenses/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -504,7 +719,12 @@
       "category": "high",
       "priority": 46,
       "description": "Create license card component",
-      "acceptance_criteria": ["Shows package icon and name", "License key with copy button (masked)", "Status badge", "Device count progress bar"],
+      "acceptance_criteria": [
+        "Shows package icon and name",
+        "License key with copy button (masked)",
+        "Status badge",
+        "Device count progress bar"
+      ],
       "file_hint": "components/licenses/LicenseCard.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -515,7 +735,12 @@
       "category": "high",
       "priority": 47,
       "description": "Create device list component",
-      "acceptance_criteria": ["Shows device name and type icon", "Last seen timestamp", "Deactivate button with confirmation", "Current device indicator"],
+      "acceptance_criteria": [
+        "Shows device name and type icon",
+        "Last seen timestamp",
+        "Deactivate button with confirmation",
+        "Current device indicator"
+      ],
       "file_hint": "components/licenses/DeviceList.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -526,7 +751,12 @@
       "category": "medium",
       "priority": 48,
       "description": "Add reveal license key functionality",
-      "acceptance_criteria": ["Click to reveal full key", "Auto-hide after 30 seconds", "Copy to clipboard button", "Security confirmation"],
+      "acceptance_criteria": [
+        "Click to reveal full key",
+        "Auto-hide after 30 seconds",
+        "Copy to clipboard button",
+        "Security confirmation"
+      ],
       "file_hint": "components/licenses/LicenseKey.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -537,7 +767,13 @@
       "category": "critical",
       "priority": 49,
       "description": "Implement GET /api/packages/[slug]/download - get download URL",
-      "acceptance_criteria": ["Auth required", "Checks entitlement", "Returns signed URL (1hr expiry)", "Logs download attempt", "Returns file info"],
+      "acceptance_criteria": [
+        "Auth required",
+        "Checks entitlement",
+        "Returns signed URL (1hr expiry)",
+        "Logs download attempt",
+        "Returns file info"
+      ],
       "file_hint": "app/api/packages/[slug]/download/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -548,7 +784,12 @@
       "category": "critical",
       "priority": 50,
       "description": "Create user downloads page",
-      "acceptance_criteria": ["Lists packages user can download", "Shows current version and release date", "Download button with file size", "Release notes preview"],
+      "acceptance_criteria": [
+        "Lists packages user can download",
+        "Shows current version and release date",
+        "Download button with file size",
+        "Release notes preview"
+      ],
       "file_hint": "app/app/downloads/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -559,7 +800,13 @@
       "category": "high",
       "priority": 51,
       "description": "Create download card component",
-      "acceptance_criteria": ["Package icon and name", "Version badge", "Release notes expandable", "Download button with size", "Changelog link"],
+      "acceptance_criteria": [
+        "Package icon and name",
+        "Version badge",
+        "Release notes expandable",
+        "Download button with size",
+        "Changelog link"
+      ],
       "file_hint": "components/downloads/DownloadCard.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -570,7 +817,11 @@
       "category": "medium",
       "priority": 52,
       "description": "Add beta channel toggle to downloads",
-      "acceptance_criteria": ["Toggle to show beta releases", "Warning about beta stability", "Different badge for beta versions"],
+      "acceptance_criteria": [
+        "Toggle to show beta releases",
+        "Warning about beta stability",
+        "Different badge for beta versions"
+      ],
       "passes": true,
       "implemented_at": "2026-02-10"
     },
@@ -580,7 +831,12 @@
       "category": "medium",
       "priority": 53,
       "description": "Create package changelog page",
-      "acceptance_criteria": ["Lists all releases", "Shows release notes", "Breaking changes highlighted", "Download links per version"],
+      "acceptance_criteria": [
+        "Lists all releases",
+        "Shows release notes",
+        "Breaking changes highlighted",
+        "Download links per version"
+      ],
       "file_hint": "app/app/packages/[slug]/changelog/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -591,7 +847,12 @@
       "category": "high",
       "priority": 54,
       "description": "Implement GET /api/activity - get activity feed",
-      "acceptance_criteria": ["Returns public + user's private activities", "Pagination with cursor", "Filter by type and package", "Pinned items first"],
+      "acceptance_criteria": [
+        "Returns public + user's private activities",
+        "Pagination with cursor",
+        "Filter by type and package",
+        "Pinned items first"
+      ],
       "file_hint": "app/api/activity/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -602,7 +863,12 @@
       "category": "high",
       "priority": 55,
       "description": "Create user activity feed page",
-      "acceptance_criteria": ["Infinite scroll activity list", "Filter tabs (All/Releases/Status/Announcements)", "Package filter dropdown", "Pinned items section"],
+      "acceptance_criteria": [
+        "Infinite scroll activity list",
+        "Filter tabs (All/Releases/Status/Announcements)",
+        "Package filter dropdown",
+        "Pinned items section"
+      ],
       "file_hint": "app/app/activity/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -613,7 +879,13 @@
       "category": "high",
       "priority": 56,
       "description": "Create activity card component",
-      "acceptance_criteria": ["Type-specific icon", "Title and body", "Package reference", "Action button if applicable", "Relative timestamp"],
+      "acceptance_criteria": [
+        "Type-specific icon",
+        "Title and body",
+        "Package reference",
+        "Action button if applicable",
+        "Relative timestamp"
+      ],
       "file_hint": "components/activity/ActivityCard.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -624,7 +896,12 @@
       "category": "medium",
       "priority": 57,
       "description": "Auto-create activity on new release",
-      "acceptance_criteria": ["Trigger when release published", "Activity type 'release'", "Include version and notes summary", "Link to download"],
+      "acceptance_criteria": [
+        "Trigger when release published",
+        "Activity type 'release'",
+        "Include version and notes summary",
+        "Link to download"
+      ],
       "file_hint": "lib/activity/create.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -635,7 +912,12 @@
       "category": "medium",
       "priority": 58,
       "description": "Auto-create activity on status change",
-      "acceptance_criteria": ["Trigger when package status changes", "Activity type 'status_change'", "Include status message", "Different titles for up/down"],
+      "acceptance_criteria": [
+        "Trigger when package status changes",
+        "Activity type 'status_change'",
+        "Include status message",
+        "Different titles for up/down"
+      ],
       "file_hint": "lib/activity/create.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -646,7 +928,12 @@
       "category": "medium",
       "priority": 59,
       "description": "Create admin announcement form",
-      "acceptance_criteria": ["Title, body (markdown), package selector", "Pinned toggle", "Expiration date optional", "Preview before publish"],
+      "acceptance_criteria": [
+        "Title, body (markdown), package selector",
+        "Pinned toggle",
+        "Expiration date optional",
+        "Preview before publish"
+      ],
       "file_hint": "app/admin/activity/new/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -657,7 +944,12 @@
       "category": "high",
       "priority": 60,
       "description": "Implement GET /api/status - get all package statuses",
-      "acceptance_criteria": ["Returns all package statuses", "Includes last check time", "Response time if available", "Overall status calculation"],
+      "acceptance_criteria": [
+        "Returns all package statuses",
+        "Includes last check time",
+        "Response time if available",
+        "Overall status calculation"
+      ],
       "file_hint": "app/api/status/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -668,7 +960,12 @@
       "category": "high",
       "priority": 61,
       "description": "Create status dashboard component",
-      "acceptance_criteria": ["Shows all packages with status dots", "Green/yellow/red indicators", "Last checked timestamp", "Click for details"],
+      "acceptance_criteria": [
+        "Shows all packages with status dots",
+        "Green/yellow/red indicators",
+        "Last checked timestamp",
+        "Click for details"
+      ],
       "file_hint": "components/status/StatusDashboard.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -679,7 +976,11 @@
       "category": "medium",
       "priority": 62,
       "description": "Add status overview to user dashboard",
-      "acceptance_criteria": ["Shows owned packages status", "Alert if any degraded/down", "Quick link to full status"],
+      "acceptance_criteria": [
+        "Shows owned packages status",
+        "Alert if any degraded/down",
+        "Quick link to full status"
+      ],
       "passes": true,
       "implemented_at": "2026-02-10"
     },
@@ -689,7 +990,12 @@
       "category": "medium",
       "priority": 63,
       "description": "Implement admin status check trigger",
-      "acceptance_criteria": ["POST /api/admin/status-check", "Calls package status_check_url", "Records result in status_checks", "Updates package status"],
+      "acceptance_criteria": [
+        "POST /api/admin/status-check",
+        "Calls package status_check_url",
+        "Records result in status_checks",
+        "Updates package status"
+      ],
       "file_hint": "app/api/admin/status-check/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -700,7 +1006,11 @@
       "category": "low",
       "priority": 64,
       "description": "Create automated status check cron job",
-      "acceptance_criteria": ["Vercel cron every 5 minutes", "Checks all packages with status_check_url", "Creates status_change activity on change"],
+      "acceptance_criteria": [
+        "Vercel cron every 5 minutes",
+        "Checks all packages with status_check_url",
+        "Creates status_change activity on change"
+      ],
       "file_hint": "app/api/cron/status-check/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -711,7 +1021,12 @@
       "category": "critical",
       "priority": 65,
       "description": "Create user dashboard page",
-      "acceptance_criteria": ["Welcome message", "Quick stats (products owned, active devices)", "Recent activity (last 5)", "Quick actions"],
+      "acceptance_criteria": [
+        "Welcome message",
+        "Quick stats (products owned, active devices)",
+        "Recent activity (last 5)",
+        "Quick actions"
+      ],
       "file_hint": "app/app/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -722,7 +1037,12 @@
       "category": "critical",
       "priority": 66,
       "description": "Create My Products page",
-      "acceptance_criteria": ["Grid of owned products", "Filter: All/Courses/Local Agents/Cloud Apps", "Type badge on cards", "Access actions per type"],
+      "acceptance_criteria": [
+        "Grid of owned products",
+        "Filter: All/Courses/Local Agents/Cloud Apps",
+        "Type badge on cards",
+        "Access actions per type"
+      ],
       "file_hint": "app/app/products/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -733,7 +1053,12 @@
       "category": "high",
       "priority": 67,
       "description": "Create product card component",
-      "acceptance_criteria": ["Icon and name", "Type badge", "Status indicator", "Action button (Download/Open Cloud/Access Course)"],
+      "acceptance_criteria": [
+        "Icon and name",
+        "Type badge",
+        "Status indicator",
+        "Action button (Download/Open Cloud/Access Course)"
+      ],
       "file_hint": "components/products/ProductCard.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -744,7 +1069,13 @@
       "category": "high",
       "priority": 68,
       "description": "Create package detail public page",
-      "acceptance_criteria": ["Full package description", "Features list", "Requirements", "Screenshots gallery", "Purchase/download CTA"],
+      "acceptance_criteria": [
+        "Full package description",
+        "Features list",
+        "Requirements",
+        "Screenshots gallery",
+        "Purchase/download CTA"
+      ],
       "file_hint": "app/(public)/packages/[slug]/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -755,7 +1086,12 @@
       "category": "medium",
       "priority": 69,
       "description": "Update navigation with new pages",
-      "acceptance_criteria": ["Dashboard, My Products, Downloads in nav", "Courses link (inherited)", "Activity, Licenses & Devices", "Proper active states"],
+      "acceptance_criteria": [
+        "Dashboard, My Products, Downloads in nav",
+        "Courses link (inherited)",
+        "Activity, Licenses & Devices",
+        "Proper active states"
+      ],
       "file_hint": "components/layout/sidebar.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -766,7 +1102,12 @@
       "category": "high",
       "priority": 70,
       "description": "Create SSO token generation for cloud apps",
-      "acceptance_criteria": ["Short-lived token (5 min)", "Contains user_id, entitlements", "Signed JWT", "One-time use flag"],
+      "acceptance_criteria": [
+        "Short-lived token (5 min)",
+        "Contains user_id, entitlements",
+        "Signed JWT",
+        "One-time use flag"
+      ],
       "file_hint": "lib/cloud-sso/token.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -777,7 +1118,12 @@
       "category": "high",
       "priority": 71,
       "description": "Implement POST /api/cloud-sso/generate - get SSO URL",
-      "acceptance_criteria": ["Auth required", "Checks entitlement", "Generates token", "Returns redirect URL with token"],
+      "acceptance_criteria": [
+        "Auth required",
+        "Checks entitlement",
+        "Generates token",
+        "Returns redirect URL with token"
+      ],
       "file_hint": "app/api/cloud-sso/generate/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -788,7 +1134,12 @@
       "category": "high",
       "priority": 72,
       "description": "Implement POST /api/cloud-sso/verify - verify SSO token",
-      "acceptance_criteria": ["Called by cloud apps", "Verifies token signature", "Checks not expired or used", "Returns user info and entitlements"],
+      "acceptance_criteria": [
+        "Called by cloud apps",
+        "Verifies token signature",
+        "Checks not expired or used",
+        "Returns user info and entitlements"
+      ],
       "file_hint": "app/api/cloud-sso/verify/route.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -799,7 +1150,12 @@
       "category": "medium",
       "priority": 73,
       "description": "Add 'Open Cloud App' button to products",
-      "acceptance_criteria": ["Shows for CLOUD_APP type", "Generates SSO token on click", "Redirects to cloud app URL", "Shows loading state"],
+      "acceptance_criteria": [
+        "Shows for CLOUD_APP type",
+        "Generates SSO token on click",
+        "Redirects to cloud app URL",
+        "Shows loading state"
+      ],
       "passes": true,
       "implemented_at": "2026-02-10"
     },
@@ -809,7 +1165,12 @@
       "category": "high",
       "priority": 74,
       "description": "Send email on package purchase with license key",
-      "acceptance_criteria": ["Email template with license key", "Download instructions", "Getting started guide link", "Support contact"],
+      "acceptance_criteria": [
+        "Email template with license key",
+        "Download instructions",
+        "Getting started guide link",
+        "Support contact"
+      ],
       "file_hint": "lib/email/sendPackagePurchaseEmail.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -820,7 +1181,12 @@
       "category": "medium",
       "priority": 75,
       "description": "Send email on new release for owned packages",
-      "acceptance_criteria": ["Email to users with entitlement", "Release notes summary", "Download link", "Respects notification preferences"],
+      "acceptance_criteria": [
+        "Email to users with entitlement",
+        "Release notes summary",
+        "Download link",
+        "Respects notification preferences"
+      ],
       "file_hint": "lib/email/sendNewReleaseEmail.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -831,7 +1197,12 @@
       "category": "medium",
       "priority": 76,
       "description": "Send email on license expiration warning",
-      "acceptance_criteria": ["7 days before expiration", "Renewal instructions", "Current device count", "Support link"],
+      "acceptance_criteria": [
+        "7 days before expiration",
+        "Renewal instructions",
+        "Current device count",
+        "Support link"
+      ],
       "file_hint": "lib/email/sendLicenseExpirationEmail.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -842,7 +1213,11 @@
       "category": "low",
       "priority": 77,
       "description": "Add notification preferences to user settings",
-      "acceptance_criteria": ["Toggle for new releases", "Toggle for status changes", "Per-package preferences option"],
+      "acceptance_criteria": [
+        "Toggle for new releases",
+        "Toggle for status changes",
+        "Per-package preferences option"
+      ],
       "file_hint": "app/app/settings/notifications/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -853,7 +1228,12 @@
       "category": "high",
       "priority": 78,
       "description": "Create admin dashboard with package metrics",
-      "acceptance_criteria": ["Total downloads", "Active licenses", "Revenue by package", "Active users graph"],
+      "acceptance_criteria": [
+        "Total downloads",
+        "Active licenses",
+        "Revenue by package",
+        "Active users graph"
+      ],
       "file_hint": "app/admin/dashboard/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -864,7 +1244,12 @@
       "category": "medium",
       "priority": 79,
       "description": "Add download analytics to package detail",
-      "acceptance_criteria": ["Downloads over time chart", "Downloads by version", "Geographic distribution", "Device type breakdown"],
+      "acceptance_criteria": [
+        "Downloads over time chart",
+        "Downloads by version",
+        "Geographic distribution",
+        "Device type breakdown"
+      ],
       "file_hint": "app/admin/packages/[id]/analytics/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -875,7 +1260,12 @@
       "category": "medium",
       "priority": 80,
       "description": "Add license analytics",
-      "acceptance_criteria": ["Active vs total licenses", "Activation success rate", "Device utilization", "Expiring soon count"],
+      "acceptance_criteria": [
+        "Active vs total licenses",
+        "Activation success rate",
+        "Device utilization",
+        "Expiring soon count"
+      ],
       "file_hint": "app/admin/analytics/licenses/page.tsx",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -886,7 +1276,11 @@
       "category": "high",
       "priority": 81,
       "description": "Unit tests for license key generation",
-      "acceptance_criteria": ["Format validation", "Uniqueness test", "Character set test"],
+      "acceptance_criteria": [
+        "Format validation",
+        "Uniqueness test",
+        "Character set test"
+      ],
       "file_hint": "__tests__/lib/licenses/generate.test.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -897,7 +1291,12 @@
       "category": "high",
       "priority": 82,
       "description": "Unit tests for JWT token generation/validation",
-      "acceptance_criteria": ["Token generation", "Token validation", "Expiration handling", "Invalid token handling"],
+      "acceptance_criteria": [
+        "Token generation",
+        "Token validation",
+        "Expiration handling",
+        "Invalid token handling"
+      ],
       "file_hint": "__tests__/lib/licenses/token.test.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -908,7 +1307,12 @@
       "category": "high",
       "priority": 83,
       "description": "Integration tests for license activation API",
-      "acceptance_criteria": ["Successful activation", "Invalid key handling", "Device limit exceeded", "Already activated device"],
+      "acceptance_criteria": [
+        "Successful activation",
+        "Invalid key handling",
+        "Device limit exceeded",
+        "Already activated device"
+      ],
       "file_hint": "__tests__/api/licenses/activate.test.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -919,7 +1323,12 @@
       "category": "high",
       "priority": 84,
       "description": "Integration tests for license validation API",
-      "acceptance_criteria": ["Valid token", "Expired token", "Device mismatch", "Revoked license"],
+      "acceptance_criteria": [
+        "Valid token",
+        "Expired token",
+        "Device mismatch",
+        "Revoked license"
+      ],
       "file_hint": "__tests__/api/licenses/validate.test.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -930,7 +1339,12 @@
       "category": "medium",
       "priority": 85,
       "description": "Integration tests for package CRUD APIs",
-      "acceptance_criteria": ["Create package", "Update package", "Delete package", "Auth checks"],
+      "acceptance_criteria": [
+        "Create package",
+        "Update package",
+        "Delete package",
+        "Auth checks"
+      ],
       "file_hint": "__tests__/api/admin/packages.test.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -941,7 +1355,12 @@
       "category": "medium",
       "priority": 86,
       "description": "E2E test for package purchase flow",
-      "acceptance_criteria": ["View package", "Checkout", "License created", "Download available"],
+      "acceptance_criteria": [
+        "View package",
+        "Checkout",
+        "License created",
+        "Download available"
+      ],
       "file_hint": "e2e/package-purchase.spec.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -952,7 +1371,12 @@
       "category": "medium",
       "priority": 87,
       "description": "E2E test for license activation flow",
-      "acceptance_criteria": ["Get license key", "Call activate API", "Validate token", "Deactivate device"],
+      "acceptance_criteria": [
+        "Get license key",
+        "Call activate API",
+        "Validate token",
+        "Deactivate device"
+      ],
       "file_hint": "e2e/license-activation.spec.ts",
       "passes": true,
       "implemented_at": "2026-02-10"
@@ -963,7 +1387,12 @@
       "category": "medium",
       "priority": 88,
       "description": "Bundle support - multiple packages in one purchase",
-      "acceptance_criteria": ["Bundle product type", "Contains multiple packages", "Creates all entitlements", "Discount pricing"],
+      "acceptance_criteria": [
+        "Bundle product type",
+        "Contains multiple packages",
+        "Creates all entitlements",
+        "Discount pricing"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -973,7 +1402,12 @@
       "category": "medium",
       "priority": 89,
       "description": "Subscription tier with all packages access",
-      "acceptance_criteria": ["Subscription product", "Grants all package entitlements", "Handles cancellation", "Renewal flow"],
+      "acceptance_criteria": [
+        "Subscription product",
+        "Grants all package entitlements",
+        "Handles cancellation",
+        "Renewal flow"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -983,7 +1417,12 @@
       "category": "medium",
       "priority": 90,
       "description": "Trial/demo mode for packages",
-      "acceptance_criteria": ["Time-limited trial (7 days)", "Trial license type", "Convert trial to paid", "One trial per user per package"],
+      "acceptance_criteria": [
+        "Time-limited trial (7 days)",
+        "Trial license type",
+        "Convert trial to paid",
+        "One trial per user per package"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -993,7 +1432,12 @@
       "category": "low",
       "priority": 91,
       "description": "Promo codes for package discounts",
-      "acceptance_criteria": ["Create promo codes", "Apply at checkout", "Usage limits", "Expiration dates"],
+      "acceptance_criteria": [
+        "Create promo codes",
+        "Apply at checkout",
+        "Usage limits",
+        "Expiration dates"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1003,7 +1447,11 @@
       "category": "low",
       "priority": 92,
       "description": "Referral system for packages",
-      "acceptance_criteria": ["Generate referral links", "Track conversions", "Credit/discount for referrer"],
+      "acceptance_criteria": [
+        "Generate referral links",
+        "Track conversions",
+        "Credit/discount for referrer"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1013,7 +1461,12 @@
       "category": "high",
       "priority": 93,
       "description": "Link packages to related courses",
-      "acceptance_criteria": ["related_course_id on packages", "Show course on package page", "Show package on course page", "Bundle pricing option"],
+      "acceptance_criteria": [
+        "related_course_id on packages",
+        "Show course on package page",
+        "Show package on course page",
+        "Bundle pricing option"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1023,7 +1476,11 @@
       "category": "medium",
       "priority": 94,
       "description": "Course includes software download",
-      "acceptance_criteria": ["Lesson type: download", "Entitlement grants software access", "Download from within course"],
+      "acceptance_criteria": [
+        "Lesson type: download",
+        "Entitlement grants software access",
+        "Download from within course"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1033,7 +1490,11 @@
       "category": "medium",
       "priority": 95,
       "description": "Auto-generate setup lessons for packages",
-      "acceptance_criteria": ["Installation guide template", "License activation guide", "Troubleshooting guide"],
+      "acceptance_criteria": [
+        "Installation guide template",
+        "License activation guide",
+        "Troubleshooting guide"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1043,7 +1504,11 @@
       "category": "medium",
       "priority": 96,
       "description": "Mobile responsive design audit",
-      "acceptance_criteria": ["All pages work on mobile", "Touch-friendly UI", "Responsive navigation"],
+      "acceptance_criteria": [
+        "All pages work on mobile",
+        "Touch-friendly UI",
+        "Responsive navigation"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1053,7 +1518,11 @@
       "category": "medium",
       "priority": 97,
       "description": "Performance optimization",
-      "acceptance_criteria": ["Page load under 2s", "API responses under 200ms", "Proper caching headers"],
+      "acceptance_criteria": [
+        "Page load under 2s",
+        "API responses under 200ms",
+        "Proper caching headers"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1063,7 +1532,11 @@
       "category": "low",
       "priority": 98,
       "description": "SEO optimization for package pages",
-      "acceptance_criteria": ["Meta tags", "Structured data", "Sitemap inclusion"],
+      "acceptance_criteria": [
+        "Meta tags",
+        "Structured data",
+        "Sitemap inclusion"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1073,7 +1546,11 @@
       "category": "low",
       "priority": 99,
       "description": "Accessibility audit (WCAG 2.1)",
-      "acceptance_criteria": ["Keyboard navigation", "Screen reader support", "Color contrast"],
+      "acceptance_criteria": [
+        "Keyboard navigation",
+        "Screen reader support",
+        "Color contrast"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1083,7 +1560,11 @@
       "category": "critical",
       "priority": 100,
       "description": "Production environment setup",
-      "acceptance_criteria": ["Vercel deployment config", "Environment variables", "Domain configuration"],
+      "acceptance_criteria": [
+        "Vercel deployment config",
+        "Environment variables",
+        "Domain configuration"
+      ],
       "file_hint": "vercel.json",
       "passes": true,
       "implemented_at": "2026-02-11"
@@ -1094,7 +1575,12 @@
       "category": "critical",
       "priority": 101,
       "description": "Production Supabase setup",
-      "acceptance_criteria": ["Create production project", "Apply all migrations", "Configure RLS", "Set up backups"],
+      "acceptance_criteria": [
+        "Create production project",
+        "Apply all migrations",
+        "Configure RLS",
+        "Set up backups"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1104,7 +1590,12 @@
       "category": "high",
       "priority": 102,
       "description": "Cloudflare R2 setup for binaries",
-      "acceptance_criteria": ["R2 bucket created", "Access policies configured", "Signed URL generation", "CORS settings"],
+      "acceptance_criteria": [
+        "R2 bucket created",
+        "Access policies configured",
+        "Signed URL generation",
+        "CORS settings"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1114,7 +1605,11 @@
       "category": "high",
       "priority": 103,
       "description": "Production Stripe configuration",
-      "acceptance_criteria": ["Live mode webhook", "Products created", "Pricing configured"],
+      "acceptance_criteria": [
+        "Live mode webhook",
+        "Products created",
+        "Pricing configured"
+      ],
       "passes": true,
       "implemented_at": "2026-02-11"
     },
@@ -1124,7 +1619,11 @@
       "category": "critical",
       "priority": 104,
       "description": "Course listing page (inherited from Portal28)",
-      "acceptance_criteria": ["Shows available courses", "Enrolled status", "Progress indicator"],
+      "acceptance_criteria": [
+        "Shows available courses",
+        "Enrolled status",
+        "Progress indicator"
+      ],
       "passes": true
     },
     {
@@ -1133,7 +1632,11 @@
       "category": "critical",
       "priority": 105,
       "description": "Course detail page (inherited)",
-      "acceptance_criteria": ["Course overview", "Module/lesson list", "Enroll/purchase CTA"],
+      "acceptance_criteria": [
+        "Course overview",
+        "Module/lesson list",
+        "Enroll/purchase CTA"
+      ],
       "passes": true
     },
     {
@@ -1142,7 +1645,11 @@
       "category": "critical",
       "priority": 106,
       "description": "Lesson viewer with Mux video (inherited)",
-      "acceptance_criteria": ["Mux video player", "Progress tracking", "Next/prev navigation"],
+      "acceptance_criteria": [
+        "Mux video player",
+        "Progress tracking",
+        "Next/prev navigation"
+      ],
       "passes": true
     },
     {
@@ -1151,7 +1658,11 @@
       "category": "high",
       "priority": 107,
       "description": "Course progress tracking (inherited)",
-      "acceptance_criteria": ["Mark lessons complete", "Overall progress %", "Resume where left off"],
+      "acceptance_criteria": [
+        "Mark lessons complete",
+        "Overall progress %",
+        "Resume where left off"
+      ],
       "passes": true
     },
     {
@@ -1160,7 +1671,11 @@
       "category": "critical",
       "priority": 108,
       "description": "Magic link authentication (inherited)",
-      "acceptance_criteria": ["Email magic link login", "Supabase auth integration", "Session management"],
+      "acceptance_criteria": [
+        "Email magic link login",
+        "Supabase auth integration",
+        "Session management"
+      ],
       "passes": true
     },
     {
@@ -1169,7 +1684,11 @@
       "category": "critical",
       "priority": 109,
       "description": "Protected routes middleware (inherited)",
-      "acceptance_criteria": ["Auth required for /app routes", "Admin routes protected", "Redirect to login"],
+      "acceptance_criteria": [
+        "Auth required for /app routes",
+        "Admin routes protected",
+        "Redirect to login"
+      ],
       "passes": true
     },
     {
@@ -1178,7 +1697,11 @@
       "category": "critical",
       "priority": 110,
       "description": "Stripe checkout integration (inherited)",
-      "acceptance_criteria": ["Create checkout sessions", "Handle success/cancel", "Webhook processing"],
+      "acceptance_criteria": [
+        "Create checkout sessions",
+        "Handle success/cancel",
+        "Webhook processing"
+      ],
       "passes": true
     },
     {
@@ -1187,7 +1710,11 @@
       "category": "critical",
       "priority": 111,
       "description": "Course entitlement system (inherited)",
-      "acceptance_criteria": ["Grant access on purchase", "Check access in middleware", "Handle subscriptions"],
+      "acceptance_criteria": [
+        "Grant access on purchase",
+        "Check access in middleware",
+        "Handle subscriptions"
+      ],
       "passes": true
     },
     {
@@ -1196,7 +1723,11 @@
       "category": "high",
       "priority": 112,
       "description": "Admin course management (inherited)",
-      "acceptance_criteria": ["Create/edit courses", "Manage modules/lessons", "Upload videos"],
+      "acceptance_criteria": [
+        "Create/edit courses",
+        "Manage modules/lessons",
+        "Upload videos"
+      ],
       "passes": true
     },
     {
@@ -1205,7 +1736,11 @@
       "category": "high",
       "priority": 113,
       "description": "Admin dashboard basics (inherited)",
-      "acceptance_criteria": ["Admin navigation", "Basic stats", "User management"],
+      "acceptance_criteria": [
+        "Admin navigation",
+        "Basic stats",
+        "User management"
+      ],
       "passes": true
     },
     {
@@ -1214,7 +1749,11 @@
       "category": "high",
       "priority": 114,
       "description": "Resend email integration (inherited)",
-      "acceptance_criteria": ["Email sending configured", "Templates working", "Magic link emails"],
+      "acceptance_criteria": [
+        "Email sending configured",
+        "Templates working",
+        "Magic link emails"
+      ],
       "passes": true
     },
     {
@@ -1223,7 +1762,11 @@
       "category": "high",
       "priority": 115,
       "description": "Mux video hosting (inherited)",
-      "acceptance_criteria": ["Video upload", "Playback working", "Progress tracking"],
+      "acceptance_criteria": [
+        "Video upload",
+        "Playback working",
+        "Progress tracking"
+      ],
       "passes": true
     },
     {
@@ -1232,7 +1775,11 @@
       "category": "medium",
       "priority": 116,
       "description": "API documentation",
-      "acceptance_criteria": ["Document all endpoints", "Request/response examples", "Error codes"],
+      "acceptance_criteria": [
+        "Document all endpoints",
+        "Request/response examples",
+        "Error codes"
+      ],
       "file_hint": "docs/API_SPECS.md",
       "passes": true,
       "implemented_at": "2026-02-11"
@@ -1243,7 +1790,11 @@
       "category": "medium",
       "priority": 117,
       "description": "Local agent integration guide",
-      "acceptance_criteria": ["How to call activate API", "Token storage guide", "Validation flow"],
+      "acceptance_criteria": [
+        "How to call activate API",
+        "Token storage guide",
+        "Validation flow"
+      ],
       "file_hint": "docs/LOCAL_AGENT_INTEGRATION.md",
       "passes": true,
       "implemented_at": "2026-02-11"
@@ -1254,7 +1805,11 @@
       "category": "medium",
       "priority": 118,
       "description": "Cloud app integration guide",
-      "acceptance_criteria": ["SSO flow documentation", "Verify endpoint usage", "Session management"],
+      "acceptance_criteria": [
+        "SSO flow documentation",
+        "Verify endpoint usage",
+        "Session management"
+      ],
       "file_hint": "docs/CLOUD_APP_INTEGRATION.md",
       "passes": true,
       "implemented_at": "2026-02-11"
@@ -1265,7 +1820,11 @@
       "category": "low",
       "priority": 119,
       "description": "User help documentation",
-      "acceptance_criteria": ["Getting started guide", "FAQ", "Troubleshooting"],
+      "acceptance_criteria": [
+        "Getting started guide",
+        "FAQ",
+        "Troubleshooting"
+      ],
       "file_hint": "docs/USER_GUIDE.md",
       "passes": true,
       "implemented_at": "2026-02-11"
@@ -1276,10 +1835,2541 @@
       "category": "low",
       "priority": 120,
       "description": "Admin documentation",
-      "acceptance_criteria": ["Package management guide", "License management", "Analytics usage"],
+      "acceptance_criteria": [
+        "Package management guide",
+        "License management",
+        "Analytics usage"
+      ],
       "file_hint": "docs/ADMIN_GUIDE.md",
       "passes": true,
       "implemented_at": "2026-02-11"
+    },
+    {
+      "id": "sh-WC-001",
+      "name": "Unit tests for auth flows",
+      "description": "Unit tests for sign-in, sign-up, password reset",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Sign-in",
+        "Sign-up",
+        "Reset",
+        "Session"
+      ]
+    },
+    {
+      "id": "sh-WC-002",
+      "name": "Unit tests for API route handlers",
+      "description": "Unit tests for all API routes",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "All routes",
+        "Error cases",
+        "Auth middleware"
+      ]
+    },
+    {
+      "id": "sh-WC-003",
+      "name": "Unit tests for database queries",
+      "description": "Unit tests for CRUD helpers",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Create/read/update/delete",
+        "Pagination",
+        "Search"
+      ]
+    },
+    {
+      "id": "sh-WC-004",
+      "name": "Unit tests for form validation",
+      "description": "Unit tests for validation rules",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Required",
+        "Email",
+        "Password",
+        "Custom"
+      ]
+    },
+    {
+      "id": "sh-WC-005",
+      "name": "Unit tests for utility functions",
+      "description": "Unit tests for formatting and helpers",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Date",
+        "Currency",
+        "String",
+        "Edge cases"
+      ]
+    },
+    {
+      "id": "sh-WC-006",
+      "name": "Unit tests for state management",
+      "description": "Unit tests for stores/context",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Initial state",
+        "Actions",
+        "Selectors"
+      ]
+    },
+    {
+      "id": "sh-WC-007",
+      "name": "Integration tests for primary workflow",
+      "description": "Full workflow: sign-up through core action",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Account",
+        "Onboard",
+        "Action",
+        "Verify"
+      ]
+    },
+    {
+      "id": "sh-WC-008",
+      "name": "Integration tests for payment flow",
+      "description": "Stripe checkout and webhook test",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Checkout",
+        "Webhook",
+        "Subscription"
+      ]
+    },
+    {
+      "id": "sh-WC-009",
+      "name": "Integration tests for import/export",
+      "description": "CSV/JSON import and export",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Upload",
+        "Map",
+        "Import",
+        "Export"
+      ]
+    },
+    {
+      "id": "sh-WC-010",
+      "name": "Integration tests for search/filter",
+      "description": "Search, filter, and pagination",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Text search",
+        "Filters",
+        "Pagination"
+      ]
+    },
+    {
+      "id": "sh-WC-011",
+      "name": "E2E tests for auth with Playwright",
+      "description": "Playwright auth tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Login",
+        "Signup",
+        "Protected routes"
+      ]
+    },
+    {
+      "id": "sh-WC-012",
+      "name": "E2E tests for CRUD operations",
+      "description": "Playwright CRUD tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Create",
+        "View",
+        "Edit",
+        "Delete"
+      ]
+    },
+    {
+      "id": "sh-WC-013",
+      "name": "E2E tests for settings",
+      "description": "Playwright settings tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Profile",
+        "Preferences",
+        "Persistence"
+      ]
+    },
+    {
+      "id": "sh-WC-014",
+      "name": "E2E tests for responsive layouts",
+      "description": "Playwright breakpoint tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Mobile",
+        "Tablet",
+        "Desktop"
+      ]
+    },
+    {
+      "id": "sh-WC-015",
+      "name": "E2E tests for error states",
+      "description": "Playwright error/edge tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "404",
+        "Error boundary",
+        "Empty state"
+      ]
+    },
+    {
+      "id": "sh-WC-016",
+      "name": "Performance test: page load < 3s",
+      "description": "Page load optimization",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "LCP < 2.5s",
+        "FID < 100ms",
+        "CLS < 0.1"
+      ]
+    },
+    {
+      "id": "sh-WC-017",
+      "name": "Performance test: API < 500ms",
+      "description": "API response times",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "List < 500ms",
+        "Detail < 300ms",
+        "Search < 500ms"
+      ]
+    },
+    {
+      "id": "sh-WC-018",
+      "name": "Performance test: DB queries",
+      "description": "Query optimization",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No seq scans",
+        "Indexes",
+        "Plans checked"
+      ]
+    },
+    {
+      "id": "sh-WC-019",
+      "name": "Load test: concurrent users",
+      "description": "50+ concurrent user simulation",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No errors",
+        "Response < 2x",
+        "No leaks"
+      ]
+    },
+    {
+      "id": "sh-WC-020",
+      "name": "Accessibility audit with axe-core",
+      "description": "Automated a11y scan",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No critical",
+        "No serious",
+        "ARIA correct"
+      ]
+    },
+    {
+      "id": "sh-WC-021",
+      "name": "Visual regression tests",
+      "description": "Screenshot comparison",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Dashboard",
+        "Lists",
+        "Forms",
+        "Settings"
+      ]
+    },
+    {
+      "id": "sh-WC-022",
+      "name": "API contract tests",
+      "description": "Response shape validation",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Shapes match",
+        "Errors typed",
+        "Pagination"
+      ]
+    },
+    {
+      "id": "sh-WC-023",
+      "name": "Security test: auth bypass",
+      "description": "Unauthenticated rejection",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "401 on API",
+        "Redirect pages",
+        "No leaks"
+      ]
+    },
+    {
+      "id": "sh-WC-024",
+      "name": "Security test: injection prevention",
+      "description": "XSS and SQL injection tests",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Script sanitized",
+        "SQL blocked"
+      ]
+    },
+    {
+      "id": "sh-WC-025",
+      "name": "Test coverage reports",
+      "description": "Coverage config and thresholds",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Config",
+        "HTML report",
+        "Thresholds"
+      ]
+    },
+    {
+      "id": "sh-WC-026",
+      "name": "Snapshot tests for components",
+      "description": "Snapshot critical components",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Dashboard",
+        "Forms",
+        "Modals"
+      ]
+    },
+    {
+      "id": "sh-WC-027",
+      "name": "Test seed script",
+      "description": "Idempotent test data seeding",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Accounts",
+        "Entities",
+        "Relations"
+      ]
+    },
+    {
+      "id": "sh-WC-028",
+      "name": "Mock service layer",
+      "description": "Mock external services",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Auth",
+        "DB",
+        "Payment",
+        "Email"
+      ]
+    },
+    {
+      "id": "sh-WC-029",
+      "name": "CI test configuration",
+      "description": "Tests in CI pipeline",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Commands",
+        "Env vars",
+        "Parallel",
+        "Reports"
+      ]
+    },
+    {
+      "id": "sh-WC-030",
+      "name": "Regression test suite",
+      "description": "Tests for fixed bugs",
+      "category": "testing",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Per-bug tests",
+        "Edge cases",
+        "Prevent regressions"
+      ]
+    },
+    {
+      "id": "sh-WC-031",
+      "name": "CSRF protection on mutations",
+      "description": "CSRF tokens on POST/PUT/DELETE",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Token gen",
+        "Validation",
+        "Cookie"
+      ]
+    },
+    {
+      "id": "sh-WC-032",
+      "name": "Rate limiting on auth endpoints",
+      "description": "Rate limit sign-in/up/reset",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Per-IP",
+        "Per-account",
+        "429",
+        "Backoff"
+      ]
+    },
+    {
+      "id": "sh-WC-033",
+      "name": "Rate limiting on API endpoints",
+      "description": "Rate limit all APIs",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Per-user",
+        "Per-tier",
+        "Headers"
+      ]
+    },
+    {
+      "id": "sh-WC-034",
+      "name": "Input sanitization",
+      "description": "Sanitize all user inputs",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Strip HTML",
+        "Escape chars",
+        "Trim",
+        "Length"
+      ]
+    },
+    {
+      "id": "sh-WC-035",
+      "name": "SQL injection prevention audit",
+      "description": "Verify parameterized queries",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No concatenation",
+        "Parameterized"
+      ]
+    },
+    {
+      "id": "sh-WC-036",
+      "name": "Secure HTTP headers",
+      "description": "CSP, HSTS, X-Frame-Options",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "CSP",
+        "HSTS",
+        "X-Frame",
+        "X-Content-Type"
+      ]
+    },
+    {
+      "id": "sh-WC-037",
+      "name": "Environment variable security",
+      "description": "No secrets in client bundles",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No client secrets",
+        "No .env in git"
+      ]
+    },
+    {
+      "id": "sh-WC-038",
+      "name": "Auth token security",
+      "description": "Secure token storage/rotation",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "HttpOnly",
+        "Secure",
+        "SameSite",
+        "Rotation"
+      ]
+    },
+    {
+      "id": "sh-WC-039",
+      "name": "File upload security",
+      "description": "Validate uploads",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "MIME check",
+        "Size limit",
+        "Whitelist",
+        "Isolation"
+      ]
+    },
+    {
+      "id": "sh-WC-040",
+      "name": "API authorization checks",
+      "description": "Auth on every endpoint",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Own data only",
+        "Admin protected",
+        "Role checks"
+      ]
+    },
+    {
+      "id": "sh-WC-041",
+      "name": "Dependency vulnerability scanning",
+      "description": "Automated CVE scanning",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "npm audit",
+        "Dependabot",
+        "Alerts"
+      ]
+    },
+    {
+      "id": "sh-WC-042",
+      "name": "Sensitive data encryption",
+      "description": "Encrypt PII at rest",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "PII identified",
+        "Encrypted",
+        "Key mgmt"
+      ]
+    },
+    {
+      "id": "sh-WC-043",
+      "name": "Audit logging",
+      "description": "Log security-relevant actions",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Auth events",
+        "Data access",
+        "Admin actions"
+      ]
+    },
+    {
+      "id": "sh-WC-044",
+      "name": "Session hardening",
+      "description": "Secure sessions with timeouts",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Timeout",
+        "Limits",
+        "Revocation"
+      ]
+    },
+    {
+      "id": "sh-WC-045",
+      "name": "GDPR/privacy compliance",
+      "description": "Data export/deletion/consent",
+      "category": "security",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Export",
+        "Deletion",
+        "Consent"
+      ]
+    },
+    {
+      "id": "sh-WC-046",
+      "name": "Server-side caching",
+      "description": "Cache expensive queries",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Headers",
+        "SWR",
+        "Invalidation"
+      ]
+    },
+    {
+      "id": "sh-WC-047",
+      "name": "Client-side data caching",
+      "description": "React Query/SWR config",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Stale time",
+        "Persistence",
+        "Optimistic"
+      ]
+    },
+    {
+      "id": "sh-WC-048",
+      "name": "Code splitting and lazy loading",
+      "description": "Split bundles per route",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Dynamic imports",
+        "Suspense"
+      ]
+    },
+    {
+      "id": "sh-WC-049",
+      "name": "Image optimization",
+      "description": "next/image, WebP, responsive",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "next/image",
+        "WebP",
+        "Responsive"
+      ]
+    },
+    {
+      "id": "sh-WC-050",
+      "name": "Database query optimization",
+      "description": "Indexes and pooling",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Indexes",
+        "Analysis",
+        "Pooling"
+      ]
+    },
+    {
+      "id": "sh-WC-051",
+      "name": "API response compression",
+      "description": "gzip/brotli",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Compression",
+        "Negotiation",
+        "Threshold"
+      ]
+    },
+    {
+      "id": "sh-WC-052",
+      "name": "Pagination on all lists",
+      "description": "Cursor/offset pagination",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Cursor",
+        "Size limits",
+        "Total count"
+      ]
+    },
+    {
+      "id": "sh-WC-053",
+      "name": "Request deduplication",
+      "description": "Prevent duplicate calls",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Debounce",
+        "Cancel",
+        "Dedup"
+      ]
+    },
+    {
+      "id": "sh-WC-054",
+      "name": "Static asset caching",
+      "description": "CDN with long-term cache",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Cache-Control",
+        "Hashing",
+        "CDN"
+      ]
+    },
+    {
+      "id": "sh-WC-055",
+      "name": "Connection pooling",
+      "description": "DB connection pool config",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Pool size",
+        "Timeout",
+        "Recycling"
+      ]
+    },
+    {
+      "id": "sh-WC-056",
+      "name": "Memory optimization",
+      "description": "Fix memory leaks",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "SSR leaks",
+        "Cleanup",
+        "Listeners"
+      ]
+    },
+    {
+      "id": "sh-WC-057",
+      "name": "Bundle size monitoring",
+      "description": "Track bundle regressions",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Analyzer",
+        "Budgets",
+        "CI check"
+      ]
+    },
+    {
+      "id": "sh-WC-058",
+      "name": "Navigation prefetching",
+      "description": "Prefetch routes/data",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Link prefetch",
+        "Data prefetch"
+      ]
+    },
+    {
+      "id": "sh-WC-059",
+      "name": "Web vitals monitoring",
+      "description": "Track Core Web Vitals",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "LCP",
+        "FID",
+        "CLS",
+        "Dashboard"
+      ]
+    },
+    {
+      "id": "sh-WC-060",
+      "name": "Streaming SSR",
+      "description": "React streaming for TTFB",
+      "category": "performance",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Suspense",
+        "Streaming",
+        "Progressive"
+      ]
+    },
+    {
+      "id": "sh-WC-061",
+      "name": "Dynamic meta tags",
+      "description": "Title/desc/OG on all pages",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Titles",
+        "Descriptions",
+        "OG",
+        "Twitter"
+      ]
+    },
+    {
+      "id": "sh-WC-062",
+      "name": "XML sitemap generation",
+      "description": "Auto-generate sitemap.xml",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "All routes",
+        "Priority",
+        "Auto-update"
+      ]
+    },
+    {
+      "id": "sh-WC-063",
+      "name": "robots.txt configuration",
+      "description": "Proper robots.txt",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Allow public",
+        "Disallow admin"
+      ]
+    },
+    {
+      "id": "sh-WC-064",
+      "name": "Structured data JSON-LD",
+      "description": "Schema.org rich results",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Organization",
+        "Product",
+        "Breadcrumbs"
+      ]
+    },
+    {
+      "id": "sh-WC-065",
+      "name": "Canonical URLs",
+      "description": "Prevent duplicate content",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Canonical tags",
+        "Query params"
+      ]
+    },
+    {
+      "id": "sh-WC-066",
+      "name": "OG image generation",
+      "description": "Dynamic social images",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Dynamic text",
+        "Branded",
+        "Cached"
+      ]
+    },
+    {
+      "id": "sh-WC-067",
+      "name": "Error page SEO",
+      "description": "Proper status codes",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "404 status",
+        "Custom page",
+        "No-index"
+      ]
+    },
+    {
+      "id": "sh-WC-068",
+      "name": "Breadcrumb navigation",
+      "description": "Breadcrumbs with structured data",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Visual",
+        "JSON-LD"
+      ]
+    },
+    {
+      "id": "sh-WC-069",
+      "name": "PageSpeed > 90",
+      "description": "Google PageSpeed optimization",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Performance",
+        "A11y",
+        "Best practices"
+      ]
+    },
+    {
+      "id": "sh-WC-070",
+      "name": "Social share preview testing",
+      "description": "Verify share previews",
+      "category": "seo",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Facebook",
+        "Twitter",
+        "LinkedIn"
+      ]
+    },
+    {
+      "id": "sh-WC-071",
+      "name": "ARIA labels on interactives",
+      "description": "Proper ARIA attributes",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Buttons",
+        "Inputs",
+        "Icons",
+        "Roles"
+      ]
+    },
+    {
+      "id": "sh-WC-072",
+      "name": "Keyboard navigation",
+      "description": "All features via keyboard",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Tab order",
+        "Focus visible",
+        "Escape"
+      ]
+    },
+    {
+      "id": "sh-WC-073",
+      "name": "Focus management on routes",
+      "description": "Focus on route change",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Main content",
+        "Skip nav",
+        "Announce"
+      ]
+    },
+    {
+      "id": "sh-WC-074",
+      "name": "Color contrast WCAG AA",
+      "description": "Meet contrast ratios",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Normal 4.5:1",
+        "Large 3:1",
+        "Both themes"
+      ]
+    },
+    {
+      "id": "sh-WC-075",
+      "name": "Screen reader compatibility",
+      "description": "Readable by SR",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Alt text",
+        "Tables",
+        "Forms",
+        "Live regions"
+      ]
+    },
+    {
+      "id": "sh-WC-076",
+      "name": "Responsive text scaling",
+      "description": "Support 200% zoom",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "No scroll",
+        "No overlap",
+        "No hidden"
+      ]
+    },
+    {
+      "id": "sh-WC-077",
+      "name": "Form error announcements",
+      "description": "Announce validation errors",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Summary",
+        "Inline",
+        "Focus to first"
+      ]
+    },
+    {
+      "id": "sh-WC-078",
+      "name": "Reduced motion support",
+      "description": "Respect prefers-reduced-motion",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Disable animations",
+        "Simplify"
+      ]
+    },
+    {
+      "id": "sh-WC-079",
+      "name": "High contrast mode",
+      "description": "Usable in high contrast",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Borders",
+        "Focus indicators"
+      ]
+    },
+    {
+      "id": "sh-WC-080",
+      "name": "Accessible data tables",
+      "description": "Proper table markup",
+      "category": "a11y",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Headers",
+        "Scope",
+        "Caption"
+      ]
+    },
+    {
+      "id": "sh-WC-081",
+      "name": "Loading skeletons all pages",
+      "description": "Skeleton loading states",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Dashboard",
+        "List",
+        "Detail",
+        "Form"
+      ]
+    },
+    {
+      "id": "sh-WC-082",
+      "name": "Empty states all lists",
+      "description": "Helpful empty states",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Component",
+        "Message",
+        "Action"
+      ]
+    },
+    {
+      "id": "sh-WC-083",
+      "name": "Error boundary with recovery",
+      "description": "Global error UI",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Catch",
+        "Message",
+        "Retry",
+        "Report"
+      ]
+    },
+    {
+      "id": "sh-WC-084",
+      "name": "Toast notification system",
+      "description": "Global toasts",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Variants",
+        "Auto-dismiss",
+        "Stack"
+      ]
+    },
+    {
+      "id": "sh-WC-085",
+      "name": "Confirmation dialogs",
+      "description": "Confirm destructive actions",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Delete",
+        "Cancel",
+        "Clear"
+      ]
+    },
+    {
+      "id": "sh-WC-086",
+      "name": "Responsive sidebar nav",
+      "description": "Collapsible sidebar",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Desktop",
+        "Mobile drawer",
+        "Toggle"
+      ]
+    },
+    {
+      "id": "sh-WC-087",
+      "name": "Dark mode with system pref",
+      "description": "Light/dark/system theme",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Toggle",
+        "System",
+        "Persist"
+      ]
+    },
+    {
+      "id": "sh-WC-088",
+      "name": "Form autosave with drafts",
+      "description": "Auto-save form progress",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Interval",
+        "Indicator",
+        "Restore"
+      ]
+    },
+    {
+      "id": "sh-WC-089",
+      "name": "Infinite scroll",
+      "description": "Auto-load on scroll",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Auto-load",
+        "Spinner",
+        "End indicator"
+      ]
+    },
+    {
+      "id": "sh-WC-090",
+      "name": "Keyboard shortcuts",
+      "description": "Power user shortcuts",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Cmd+/ help",
+        "Nav shortcuts",
+        "Actions"
+      ]
+    },
+    {
+      "id": "sh-WC-091",
+      "name": "Breadcrumb component",
+      "description": "Navigation breadcrumbs",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Auto-generate",
+        "Clickable",
+        "Current"
+      ]
+    },
+    {
+      "id": "sh-WC-092",
+      "name": "Responsive data tables",
+      "description": "Tables on mobile",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Desktop table",
+        "Mobile cards",
+        "Sort"
+      ]
+    },
+    {
+      "id": "sh-WC-093",
+      "name": "Drag-and-drop upload",
+      "description": "File drag-drop zone",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Overlay",
+        "Validation",
+        "Progress"
+      ]
+    },
+    {
+      "id": "sh-WC-094",
+      "name": "Command palette Cmd+K",
+      "description": "Quick search/nav",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Search",
+        "Navigate",
+        "Actions"
+      ]
+    },
+    {
+      "id": "sh-WC-095",
+      "name": "Multi-step form wizard",
+      "description": "Stepped form with progress",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Steps",
+        "Back/next",
+        "Validation"
+      ]
+    },
+    {
+      "id": "sh-WC-096",
+      "name": "Notification dropdown",
+      "description": "Bell with dropdown",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Badge",
+        "List",
+        "Mark read"
+      ]
+    },
+    {
+      "id": "sh-WC-097",
+      "name": "Avatar with upload",
+      "description": "Avatar display and upload",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Image",
+        "Initials",
+        "Upload",
+        "Remove"
+      ]
+    },
+    {
+      "id": "sh-WC-098",
+      "name": "Copy-to-clipboard",
+      "description": "Click-to-copy with feedback",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Copy button",
+        "Toast",
+        "Clipboard API"
+      ]
+    },
+    {
+      "id": "sh-WC-099",
+      "name": "Bulk action toolbar",
+      "description": "Multi-select with actions",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Checkbox",
+        "Select all",
+        "Bulk ops"
+      ]
+    },
+    {
+      "id": "sh-WC-100",
+      "name": "Print-friendly styles",
+      "description": "Print stylesheet",
+      "category": "ui",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Hide nav",
+        "Clean layout",
+        "Print button"
+      ]
+    },
+    {
+      "id": "sh-WC-101",
+      "name": "CI/CD pipeline",
+      "description": "GitHub Actions for test/deploy",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Test on PR",
+        "Lint",
+        "Build",
+        "Deploy"
+      ]
+    },
+    {
+      "id": "sh-WC-102",
+      "name": "Environment variable management",
+      "description": "Structured env with validation",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        ".env.example",
+        "Runtime check"
+      ]
+    },
+    {
+      "id": "sh-WC-103",
+      "name": "Error monitoring Sentry",
+      "description": "Production error tracking",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "SDK",
+        "Source maps",
+        "Alerts"
+      ]
+    },
+    {
+      "id": "sh-WC-104",
+      "name": "Database migrations workflow",
+      "description": "Migration system",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "CLI",
+        "Version tracking",
+        "Rollback"
+      ]
+    },
+    {
+      "id": "sh-WC-105",
+      "name": "Staging environment",
+      "description": "Staging matching prod",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Staging DB",
+        "Staging env",
+        "Preview URLs"
+      ]
+    },
+    {
+      "id": "sh-WC-106",
+      "name": "Automated backups",
+      "description": "DB backup with retention",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Daily",
+        "Retention",
+        "Restore tested"
+      ]
+    },
+    {
+      "id": "sh-WC-107",
+      "name": "Log aggregation",
+      "description": "Centralized structured logging",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "JSON logs",
+        "Request ID",
+        "Levels"
+      ]
+    },
+    {
+      "id": "sh-WC-108",
+      "name": "Health check endpoints",
+      "description": "Monitoring endpoints",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "/api/health",
+        "DB check",
+        "Dependencies"
+      ]
+    },
+    {
+      "id": "sh-WC-109",
+      "name": "Feature flags system",
+      "description": "Remote feature flags",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Management",
+        "Targeting",
+        "Rollout"
+      ]
+    },
+    {
+      "id": "sh-WC-110",
+      "name": "Automated dependency updates",
+      "description": "Dependabot/Renovate",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Config",
+        "Auto-merge patch"
+      ]
+    },
+    {
+      "id": "sh-WC-111",
+      "name": "Docker containerization",
+      "description": "Dockerfile and compose",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Multi-stage",
+        "Compose",
+        "Optimized"
+      ]
+    },
+    {
+      "id": "sh-WC-112",
+      "name": "API documentation generation",
+      "description": "Auto-gen API docs",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Endpoints",
+        "Schemas",
+        "Examples"
+      ]
+    },
+    {
+      "id": "sh-WC-113",
+      "name": "Schema documentation",
+      "description": "DB schema docs",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "ER diagram",
+        "Descriptions",
+        "Relations"
+      ]
+    },
+    {
+      "id": "sh-WC-114",
+      "name": "Uptime monitoring",
+      "description": "External uptime checks",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "HTTP checks",
+        "Alerts",
+        "Status page"
+      ]
+    },
+    {
+      "id": "sh-WC-115",
+      "name": "Secrets rotation",
+      "description": "Key rotation procedure",
+      "category": "devops",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Procedure",
+        "Zero-downtime",
+        "Audit"
+      ]
+    },
+    {
+      "id": "sh-WC-116",
+      "name": "Transactional email system",
+      "description": "Email via Resend/SendGrid",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Service",
+        "Templates",
+        "Retry"
+      ]
+    },
+    {
+      "id": "sh-WC-117",
+      "name": "Welcome email on sign-up",
+      "description": "Branded welcome email",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Triggered",
+        "Template",
+        "Links"
+      ]
+    },
+    {
+      "id": "sh-WC-118",
+      "name": "Password reset email",
+      "description": "Secure reset link",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Token",
+        "Expiry",
+        "Template"
+      ]
+    },
+    {
+      "id": "sh-WC-119",
+      "name": "Email verification flow",
+      "description": "Verify email address",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Token",
+        "Confirm",
+        "Resend"
+      ]
+    },
+    {
+      "id": "sh-WC-120",
+      "name": "Notification preferences",
+      "description": "User controls",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Per-type",
+        "Frequency",
+        "Persist"
+      ]
+    },
+    {
+      "id": "sh-WC-121",
+      "name": "In-app notification center",
+      "description": "Notification list UI",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Model",
+        "Read/unread",
+        "Real-time"
+      ]
+    },
+    {
+      "id": "sh-WC-122",
+      "name": "Email templates with branding",
+      "description": "Consistent branded emails",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Header",
+        "Footer",
+        "Responsive"
+      ]
+    },
+    {
+      "id": "sh-WC-123",
+      "name": "Webhook notifications",
+      "description": "Webhooks for events",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Configurable",
+        "Selection",
+        "Retry"
+      ]
+    },
+    {
+      "id": "sh-WC-124",
+      "name": "Digest summary emails",
+      "description": "Periodic summaries",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Daily/weekly",
+        "Summary",
+        "Unsubscribe"
+      ]
+    },
+    {
+      "id": "sh-WC-125",
+      "name": "Bounce/complaint handling",
+      "description": "Handle bounced emails",
+      "category": "notifications",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Bounce hook",
+        "Complaint hook",
+        "Suppress"
+      ]
+    },
+    {
+      "id": "sh-WC-126",
+      "name": "Analytics event tracking",
+      "description": "Track key events",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Page views",
+        "Features",
+        "Conversions"
+      ]
+    },
+    {
+      "id": "sh-WC-127",
+      "name": "User behavior funnels",
+      "description": "Conversion funnels",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Onboarding",
+        "Purchase",
+        "Adoption"
+      ]
+    },
+    {
+      "id": "sh-WC-128",
+      "name": "A/B testing framework",
+      "description": "Feature flag A/B tests",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Assignment",
+        "Tracking",
+        "Significance"
+      ]
+    },
+    {
+      "id": "sh-WC-129",
+      "name": "Data export for users",
+      "description": "User data export JSON/CSV",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "All data",
+        "Format",
+        "Download"
+      ]
+    },
+    {
+      "id": "sh-WC-130",
+      "name": "Admin analytics dashboard",
+      "description": "Admin metrics view",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Growth",
+        "Revenue",
+        "Usage",
+        "Errors"
+      ]
+    },
+    {
+      "id": "sh-WC-131",
+      "name": "Data retention policies",
+      "description": "Automated cleanup",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Periods",
+        "Cleanup",
+        "Audit excluded"
+      ]
+    },
+    {
+      "id": "sh-WC-132",
+      "name": "Usage tracking per tier",
+      "description": "Feature usage limits",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Counters",
+        "Enforcement",
+        "Upgrade prompt"
+      ]
+    },
+    {
+      "id": "sh-WC-133",
+      "name": "Search analytics",
+      "description": "Track search queries",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Logging",
+        "No-result",
+        "Popular"
+      ]
+    },
+    {
+      "id": "sh-WC-134",
+      "name": "Error rate monitoring",
+      "description": "Track error spikes",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Rate calc",
+        "Alerts",
+        "Categories"
+      ]
+    },
+    {
+      "id": "sh-WC-135",
+      "name": "User feedback collection",
+      "description": "In-app feedback widget",
+      "category": "analytics",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Form",
+        "Categories",
+        "Screenshots"
+      ]
+    },
+    {
+      "id": "sh-WC-136",
+      "name": "Comprehensive README",
+      "description": "Setup and architecture",
+      "category": "documentation",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Quick start",
+        "Architecture",
+        "Contributing"
+      ]
+    },
+    {
+      "id": "sh-WC-137",
+      "name": "API documentation",
+      "description": "All endpoints documented",
+      "category": "documentation",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Endpoints",
+        "Examples",
+        "Auth"
+      ]
+    },
+    {
+      "id": "sh-WC-138",
+      "name": "Database schema docs",
+      "description": "Schema with relationships",
+      "category": "documentation",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Tables",
+        "Columns",
+        "Relations"
+      ]
+    },
+    {
+      "id": "sh-WC-139",
+      "name": "Deployment guide",
+      "description": "Step-by-step deploy",
+      "category": "documentation",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Prerequisites",
+        "Build",
+        "Deploy",
+        "Rollback"
+      ]
+    },
+    {
+      "id": "sh-WC-140",
+      "name": "Testing strategy docs",
+      "description": "How to test",
+      "category": "documentation",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Categories",
+        "Commands",
+        "Writing tests"
+      ]
+    },
+    {
+      "id": "sh-WC-141",
+      "name": "Stripe billing integration",
+      "description": "Subscriptions and payments",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Checkout",
+        "Webhooks",
+        "Sync"
+      ]
+    },
+    {
+      "id": "sh-WC-142",
+      "name": "Supabase Edge Functions",
+      "description": "Server-side logic",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Auth verify",
+        "Business logic",
+        "CORS"
+      ]
+    },
+    {
+      "id": "sh-WC-143",
+      "name": "File upload to Supabase Storage",
+      "description": "Upload with validation",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Upload",
+        "Type check",
+        "Signed URLs"
+      ]
+    },
+    {
+      "id": "sh-WC-144",
+      "name": "Real-time subscriptions",
+      "description": "Live data updates",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Subscribe",
+        "Events",
+        "UI update"
+      ]
+    },
+    {
+      "id": "sh-WC-145",
+      "name": "OpenAI/Claude AI integration",
+      "description": "LLM-powered features",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "API client",
+        "Prompts",
+        "Streaming"
+      ]
+    },
+    {
+      "id": "sh-WC-146",
+      "name": "Social OAuth providers",
+      "description": "Google/GitHub OAuth",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Config",
+        "Callback",
+        "Profile import"
+      ]
+    },
+    {
+      "id": "sh-WC-147",
+      "name": "CSV/Excel data import",
+      "description": "Import from spreadsheets",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Upload",
+        "Column map",
+        "Validate"
+      ]
+    },
+    {
+      "id": "sh-WC-148",
+      "name": "PDF report generation",
+      "description": "Server-side PDF generation",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Templates",
+        "Data",
+        "Download"
+      ]
+    },
+    {
+      "id": "sh-WC-149",
+      "name": "Slack/Discord notifications",
+      "description": "Team notification hooks",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Webhooks",
+        "Formatting",
+        "Events"
+      ]
+    },
+    {
+      "id": "sh-WC-150",
+      "name": "Calendar integration",
+      "description": "Calendar sync",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Google Calendar",
+        "iCal export",
+        "Events"
+      ]
+    },
+    {
+      "id": "sh-WC-151",
+      "name": "Email template system",
+      "description": "Branded transactional email",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Templates",
+        "Variables",
+        "Preview"
+      ]
+    },
+    {
+      "id": "sh-WC-152",
+      "name": "Webhook incoming handler",
+      "description": "Process external webhooks",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Verify signature",
+        "Parse payload",
+        "Route"
+      ]
+    },
+    {
+      "id": "sh-WC-153",
+      "name": "S3/Storage CDN for assets",
+      "description": "Asset delivery pipeline",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Upload",
+        "Transform",
+        "CDN serve"
+      ]
+    },
+    {
+      "id": "sh-WC-154",
+      "name": "Search with Supabase FTS",
+      "description": "Full-text search implementation",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "tsvector",
+        "Ranking",
+        "Debounced"
+      ]
+    },
+    {
+      "id": "sh-WC-155",
+      "name": "Cron/scheduled jobs",
+      "description": "Scheduled background tasks",
+      "category": "integrations",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Edge Function cron",
+        "Job queue",
+        "Retry"
+      ]
+    },
+    {
+      "id": "sh-WC-156",
+      "name": "Database RLS policies audit",
+      "description": "Verify RLS on all tables",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "RLS enabled",
+        "Policies per table",
+        "Tested"
+      ]
+    },
+    {
+      "id": "sh-WC-157",
+      "name": "Database indexes for performance",
+      "description": "Add indexes on FK and query columns",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "FK indexes",
+        "Status indexes",
+        "Composite"
+      ]
+    },
+    {
+      "id": "sh-WC-158",
+      "name": "Soft delete pattern",
+      "description": "Status-based soft delete",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Status field",
+        "Filter queries",
+        "Restore"
+      ]
+    },
+    {
+      "id": "sh-WC-159",
+      "name": "Audit trail table",
+      "description": "Track all data mutations",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Action type",
+        "Changed fields",
+        "User attribution"
+      ]
+    },
+    {
+      "id": "sh-WC-160",
+      "name": "Database seed script",
+      "description": "Idempotent dev seed data",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Test accounts",
+        "Sample data",
+        "Idempotent"
+      ]
+    },
+    {
+      "id": "sh-WC-161",
+      "name": "Optimistic locking",
+      "description": "Prevent concurrent overwrites",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Version field",
+        "Check on update",
+        "Conflict error"
+      ]
+    },
+    {
+      "id": "sh-WC-162",
+      "name": "Full-text search columns",
+      "description": "tsvector columns on searchable tables",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "tsvector trigger",
+        "Index",
+        "Search function"
+      ]
+    },
+    {
+      "id": "sh-WC-163",
+      "name": "JSON schema validation",
+      "description": "Validate JSONB columns",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": "Check constraint on JSONB fields"
+    },
+    {
+      "id": "sh-WC-164",
+      "name": "Database backup strategy",
+      "description": "Backup and restore procedures",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "PITR config",
+        "Manual backup",
+        "Restore test"
+      ]
+    },
+    {
+      "id": "sh-WC-165",
+      "name": "Multi-tenant data isolation",
+      "description": "Ensure tenant data separation",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "RLS per org",
+        "No cross-tenant",
+        "Tested"
+      ]
+    },
+    {
+      "id": "sh-WC-166",
+      "name": "Database connection monitoring",
+      "description": "Monitor pool and connections",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Pool metrics",
+        "Slow query log",
+        "Alerts"
+      ]
+    },
+    {
+      "id": "sh-WC-167",
+      "name": "Cascading delete policies",
+      "description": "Proper FK cascade rules",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "ON DELETE rules",
+        "Orphan prevention",
+        "Tested"
+      ]
+    },
+    {
+      "id": "sh-WC-168",
+      "name": "Data migration versioning",
+      "description": "Track schema migrations",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Version table",
+        "Up/down scripts",
+        "CI check"
+      ]
+    },
+    {
+      "id": "sh-WC-169",
+      "name": "Database type generation",
+      "description": "Auto-generate TS types from schema",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Supabase CLI types",
+        "Regenerate script"
+      ]
+    },
+    {
+      "id": "sh-WC-170",
+      "name": "Read replica configuration",
+      "description": "Configure read replicas for performance",
+      "category": "database",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Replica setup",
+        "Read routing",
+        "Lag monitoring"
+      ]
+    },
+    {
+      "id": "sh-WC-171",
+      "name": "Magic link authentication",
+      "description": "Passwordless email sign-in",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Send link",
+        "Verify token",
+        "Session create"
+      ]
+    },
+    {
+      "id": "sh-WC-172",
+      "name": "Multi-factor authentication",
+      "description": "TOTP-based 2FA",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Enable/disable",
+        "QR setup",
+        "Verify code"
+      ]
+    },
+    {
+      "id": "sh-WC-173",
+      "name": "OAuth account linking",
+      "description": "Link multiple OAuth providers",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Link flow",
+        "Unlink flow",
+        "Conflict handling"
+      ]
+    },
+    {
+      "id": "sh-WC-174",
+      "name": "Role-based access control",
+      "description": "User roles and permissions",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Role model",
+        "Permission checks",
+        "Admin UI"
+      ]
+    },
+    {
+      "id": "sh-WC-175",
+      "name": "API key management",
+      "description": "User-managed API keys",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Generate key",
+        "Revoke key",
+        "Rate limit per key"
+      ]
+    },
+    {
+      "id": "sh-WC-176",
+      "name": "Impersonation for admin",
+      "description": "Admin can impersonate users",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Impersonate endpoint",
+        "Audit log",
+        "Exit flow"
+      ]
+    },
+    {
+      "id": "sh-WC-177",
+      "name": "Password strength requirements",
+      "description": "Enforce password policy",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Min length",
+        "Complexity rules",
+        "Strength meter"
+      ]
+    },
+    {
+      "id": "sh-WC-178",
+      "name": "Account lockout policy",
+      "description": "Lock after failed attempts",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Attempt tracking",
+        "Lockout duration",
+        "Unlock flow"
+      ]
+    },
+    {
+      "id": "sh-WC-179",
+      "name": "Session management UI",
+      "description": "View and revoke sessions",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Active sessions list",
+        "Revoke button",
+        "Current indicator"
+      ]
+    },
+    {
+      "id": "sh-WC-180",
+      "name": "Auth event webhooks",
+      "description": "Notify on auth events",
+      "category": "auth",
+      "priority": "P2",
+      "passes": true,
+      "effort": "4h",
+      "criteria": [
+        "Sign-up hook",
+        "Sign-in hook",
+        "Password change hook"
+      ]
     }
   ]
 }
