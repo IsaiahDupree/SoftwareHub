@@ -1,0 +1,46 @@
+@media print {
+  /* Hide navigation and interactive elements */
+  nav,
+  footer,
+  .no-print,
+  button:not(.print-visible),
+  [role="dialog"],
+  [role="alertdialog"] {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and colors for printing */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure content is full width */
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Handle page breaks */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  table, figure, img {
+    page-break-inside: avoid;
+  }
+
+  /* Show link URLs in print */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+}

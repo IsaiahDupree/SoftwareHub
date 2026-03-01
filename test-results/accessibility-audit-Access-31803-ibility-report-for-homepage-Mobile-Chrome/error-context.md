@@ -1,0 +1,65 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - button [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+      - generic [ref=e7]:
+        - button [ref=e8] [cursor=pointer]:
+          - img [ref=e9]
+        - link "Sign In" [ref=e11] [cursor=pointer]:
+          - /url: /login
+    - main [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e15]:
+          - paragraph [ref=e16]: Portal 28
+          - heading "Step inside the room where power gets built." [level=1] [ref=e17]
+          - generic [ref=e18]:
+            - paragraph [ref=e19]: Portal 28 isn't a course hub. It's a threshold.
+            - paragraph [ref=e20]: A private clubhouse for founders, creators, and CEOs who know they're meant to operate at a higher level—and are done playing small with their story, their voice, and their brand.
+          - generic [ref=e21]:
+            - link "Enter the Room" [ref=e22] [cursor=pointer]:
+              - /url: /courses
+              - text: Enter the Room
+              - img [ref=e23]
+            - link "Sign In" [ref=e25] [cursor=pointer]:
+              - /url: /login
+          - paragraph [ref=e26]: You don't stumble into this room. You unlock it.
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - heading "This is where strategy meets intuition." [level=2] [ref=e29]
+            - paragraph [ref=e30]:
+              - text: Where storytelling becomes leverage.
+              - text: Where the AI age stops being scary—and starts working for you.
+          - generic [ref=e31]:
+            - generic [ref=e33]:
+              - img [ref=e34]
+              - heading "Brand Story" [level=3] [ref=e37]
+              - paragraph [ref=e38]: Build a brand narrative that actually sounds like you—and survives the algorithm.
+            - generic [ref=e40]:
+              - img [ref=e41]
+              - heading "Social Storytelling" [level=3] [ref=e45]
+              - paragraph [ref=e46]: Turn content into a narrative people follow. Cohesion instead of chaos.
+            - generic [ref=e48]:
+              - img [ref=e49]
+              - heading "CEO Power Portal" [level=3] [ref=e53]
+              - paragraph [ref=e54]: The inner room. Ongoing strategy for people building long-term power.
+        - generic [ref=e57]:
+          - paragraph [ref=e58]: About the Founder
+          - heading "Hi, I'm Sarah. I build brands that actually mean something." [level=2] [ref=e59]
+          - generic [ref=e60]:
+            - paragraph [ref=e61]: I'm the founder of Portal Copy Co., where I help founders, creatives, and operators turn messy ideas into clear, powerful messaging—and turn that messaging into momentum.
+            - paragraph [ref=e62]: I've spent years at the intersection of brand strategy, storytelling, content systems, and now, AI-powered creation.
+            - paragraph [ref=e63]: Portal 28 is the evolution of that work.
+            - paragraph [ref=e64]: This platform exists for people who don't just want better copy—they want command over their narrative.
+        - generic [ref=e67]:
+          - heading "Portal 28 is open." [level=2] [ref=e68]
+          - paragraph [ref=e69]: If you're here, you already felt the pull.
+          - link "Step Inside" [ref=e70] [cursor=pointer]:
+            - /url: /courses
+            - text: Step Inside
+            - img [ref=e71]
+  - alert [ref=e73]
+```

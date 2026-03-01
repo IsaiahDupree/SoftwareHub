@@ -1,0 +1,42 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - link "P28 Portal28" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e7]: P28
+      - generic [ref=e8]: Portal28
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Enter the room." [level=3] [ref=e11]
+        - paragraph [ref=e12]: Sign in to access your courses, community, and content.
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - text: Email
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - textbox "Email" [ref=e20]:
+              - /placeholder: you@domain.com
+        - generic [ref=e21]:
+          - text: Password
+          - generic [ref=e22]:
+            - img [ref=e23]
+            - textbox "Password" [ref=e26]:
+              - /placeholder: ••••••••
+        - button "Sign in" [ref=e27] [cursor=pointer]
+        - link "Forgot your password?" [ref=e29] [cursor=pointer]:
+          - /url: /forgot-password
+        - generic [ref=e31]: or
+        - button "Sign in with magic link" [ref=e32] [cursor=pointer]
+        - paragraph [ref=e33]:
+          - text: Don't have an account?
+          - link "Sign up" [ref=e34] [cursor=pointer]:
+            - /url: /signup
+    - paragraph [ref=e35]:
+      - link "Back to home" [ref=e36] [cursor=pointer]:
+        - /url: /
+        - img [ref=e37]
+        - text: Back to home
+  - alert [ref=e39]
+```

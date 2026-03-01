@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewThreadForm Snapshot Tests matches snapshot in collapsed state 1`] = `
+<div>
+  <button
+    class="w-full rounded-xl border p-4 text-left hover:bg-gray-50 transition-colors"
+  >
+    <span
+      class="text-gray-600"
+    >
+      Start a new thread...
+    </span>
+  </button>
+</div>
+`;
+
+exports[`NewThreadForm Snapshot Tests matches snapshot in expanded state 1`] = `
+<div>
+  <div
+    class="rounded-xl border p-5 space-y-4"
+  >
+    <div
+      class="font-semibold"
+    >
+      Start a new thread
+    </div>
+    <input
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Thread title"
+      type="text"
+      value=""
+    />
+    <textarea
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Write your post..."
+      rows="5"
+    />
+    <div
+      class="flex gap-2"
+    >
+      <button
+        class="px-4 py-2 rounded-lg bg-black text-white hover:bg-gray-800 disabled:opacity-50"
+      >
+        Post Thread
+      </button>
+      <button
+        class="px-4 py-2 rounded-lg border hover:bg-gray-50"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NewThreadForm Snapshot Tests matches snapshot with error state 1`] = `
+<div>
+  <div
+    class="rounded-xl border p-5 space-y-4"
+  >
+    <div
+      class="font-semibold"
+    >
+      Start a new thread
+    </div>
+    <div
+      class="bg-red-50 text-red-700 p-3 rounded-lg text-sm"
+    >
+      Title and body are required
+    </div>
+    <input
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Thread title"
+      type="text"
+      value=""
+    />
+    <textarea
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Write your post..."
+      rows="5"
+    />
+    <div
+      class="flex gap-2"
+    >
+      <button
+        class="px-4 py-2 rounded-lg bg-black text-white hover:bg-gray-800 disabled:opacity-50"
+      >
+        Post Thread
+      </button>
+      <button
+        class="px-4 py-2 rounded-lg border hover:bg-gray-50"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NewThreadForm Snapshot Tests matches snapshot with filled form data 1`] = `
+<div>
+  <div
+    class="rounded-xl border p-5 space-y-4"
+  >
+    <div
+      class="font-semibold"
+    >
+      Start a new thread
+    </div>
+    <input
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Thread title"
+      type="text"
+      value="Test Thread Title"
+    />
+    <textarea
+      class="w-full border rounded-lg px-3 py-2"
+      placeholder="Write your post..."
+      rows="5"
+    >
+      This is the body of my test thread.
+    </textarea>
+    <div
+      class="flex gap-2"
+    >
+      <button
+        class="px-4 py-2 rounded-lg bg-black text-white hover:bg-gray-800 disabled:opacity-50"
+      >
+        Post Thread
+      </button>
+      <button
+        class="px-4 py-2 rounded-lg border hover:bg-gray-50"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+`;

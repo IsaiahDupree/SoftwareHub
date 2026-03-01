@@ -1,0 +1,54 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "P28 Portal28" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e8]: P28
+            - generic [ref=e9]: Portal28
+          - button [ref=e10] [cursor=pointer]:
+            - img [ref=e11]
+        - navigation [ref=e16]:
+          - link "Home" [ref=e17] [cursor=pointer]:
+            - /url: /
+            - img [ref=e18]
+            - text: Home
+          - link "Courses" [ref=e23] [cursor=pointer]:
+            - /url: /courses
+            - img [ref=e24]
+            - text: Courses
+          - link "Bundles" [ref=e27] [cursor=pointer]:
+            - /url: /bundles
+            - img [ref=e28]
+            - text: Bundles
+        - link "Sign In" [ref=e34] [cursor=pointer]:
+          - /url: /login
+          - img [ref=e35]
+          - text: Sign In
+    - generic [ref=e38]:
+      - banner [ref=e39]:
+        - generic [ref=e41]:
+          - img
+          - searchbox "Search..." [ref=e42] [cursor=pointer]
+        - generic [ref=e43]:
+          - button [ref=e44] [cursor=pointer]:
+            - img [ref=e45]
+          - link "Sign In" [ref=e47] [cursor=pointer]:
+            - /url: /login
+      - main [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: The Curriculum
+            - heading "Command your narrative." [level=1] [ref=e52]
+            - paragraph [ref=e53]: These aren't courses. They're leverage points. Each one gives you a specific tool to own your story, your content, and your brand.
+          - generic [ref=e55]:
+            - img [ref=e56]
+            - heading "New rooms opening soon." [level=3] [ref=e59]
+            - paragraph [ref=e60]: The curriculum is being built. Check back soon.
+          - paragraph [ref=e62]: You don't leave with ideas. You leave with a usable, scalable brand story.
+  - alert [ref=e63]
+```

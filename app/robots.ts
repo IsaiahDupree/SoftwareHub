@@ -1,21 +1,16 @@
 import { MetadataRoute } from "next";
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://portal28.academy";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://softwarehub.io";
 
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "/app/*", // Protected app pages
-          "/admin/*", // Admin pages
-          "/api/*", // API routes
-          "/preview/*", // Preview routes
-        ],
+        disallow: ["/app/", "/admin/", "/api/", "/auth/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

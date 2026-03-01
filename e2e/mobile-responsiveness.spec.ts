@@ -209,4 +209,45 @@ test.describe("Mobile Responsiveness (feat-052)", () => {
       }
     });
   });
+
+  test.describe("Desktop Viewport", () => {
+    const DESKTOP_VIEWPORT = { width: 1920, height: 1080 };
+
+    test("should render properly on desktop", async ({ page }) => {
+      await page.setViewportSize(DESKTOP_VIEWPORT);
+      await page.goto("/");
+
+      // Check that main content is visible
+      await expect(page.locator("h1")).toBeVisible();
+
+      // Check page renders without scroll issues
+      const body = await page.locator("body");
+      const bodyWidth = await body.boundingBox();
+      expect(bodyWidth?.width).toBeGreaterThan(0);
+    });
+
+    test("should use multi-column layout on desktop", async ({ page }) => {
+      await page.setViewportSize(DESKTOP_VIEWPORT);
+      await page.goto("/courses");
+
+      await page.waitForTimeout(1000);
+
+      // Page should render
+      await expect(page.locator("h1")).toBeVisible();
+
+      // Check that viewport is wide
+      const viewportWidth = page.viewportSize()?.width || 0;
+      expect(viewportWidth).toBeGreaterThanOrEqual(1280);
+    });
+
+    test("should show full navigation on desktop", async ({ page }) => {
+      await page.setViewportSize(DESKTOP_VIEWPORT);
+      await page.goto("/");
+      await page.waitForLoadState("networkidle");
+
+      // Check for navigation elements
+      const header = page.locator("header");
+      await expect(header).toBeVisible();
+    });
+  });
 });

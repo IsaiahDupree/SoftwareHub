@@ -1,0 +1,501 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusDashboard Snapshot Tests matches snapshot with all operational services 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="rounded-lg border p-4 text-center font-medium bg-green-50 text-green-800 border-green-200"
+    >
+      All Systems Operational
+    </div>
+    <div
+      class="rounded-lg border bg-card text-card-foreground shadow-sm"
+    >
+      <div
+        class="flex flex-col space-y-1.5 p-6"
+      >
+        <h3
+          class="text-2xl font-semibold leading-none tracking-tight"
+        >
+          Services
+        </h3>
+      </div>
+      <div
+        class="p-0"
+      >
+        <div
+          class="divide-y"
+        >
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <img
+                alt="Watermark Remover"
+                class="h-8 w-8 rounded object-cover"
+                src="/icons/watermark.png"
+              />
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  Watermark Remover
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                  45ms
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                operational
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-green-500"
+              />
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <div
+                class="h-8 w-8 rounded bg-muted flex items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-package h-4 w-4 text-muted-foreground"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+                  />
+                  <path
+                    d="M12 22V12"
+                  />
+                  <polyline
+                    points="3.29 7 12 12 20.71 7"
+                  />
+                  <path
+                    d="m7.5 4.27 9 5.15"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  TTS Studio
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                  120ms
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                operational
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-green-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`StatusDashboard Snapshot Tests matches snapshot with empty packages array 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="rounded-lg border p-4 text-center font-medium bg-green-50 text-green-800 border-green-200"
+    >
+      All Systems Operational
+    </div>
+    <div
+      class="rounded-lg border bg-card text-card-foreground shadow-sm"
+    >
+      <div
+        class="flex flex-col space-y-1.5 p-6"
+      >
+        <h3
+          class="text-2xl font-semibold leading-none tracking-tight"
+        >
+          Services
+        </h3>
+      </div>
+      <div
+        class="p-0"
+      >
+        <div
+          class="divide-y"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`StatusDashboard Snapshot Tests matches snapshot with maintenance mode 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="rounded-lg border p-4 text-center font-medium bg-blue-50 text-blue-800 border-blue-200"
+    >
+      Maintenance in Progress
+    </div>
+    <div
+      class="rounded-lg border bg-card text-card-foreground shadow-sm"
+    >
+      <div
+        class="flex flex-col space-y-1.5 p-6"
+      >
+        <h3
+          class="text-2xl font-semibold leading-none tracking-tight"
+        >
+          Services
+        </h3>
+      </div>
+      <div
+        class="p-0"
+      >
+        <div
+          class="divide-y"
+        >
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <img
+                alt="Auto Comment"
+                class="h-8 w-8 rounded object-cover"
+                src="/icons/comment.png"
+              />
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  Auto Comment
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                maintenance
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-blue-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`StatusDashboard Snapshot Tests matches snapshot with major outage 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="rounded-lg border p-4 text-center font-medium bg-red-50 text-red-800 border-red-200"
+    >
+      Major System Outage
+    </div>
+    <div
+      class="rounded-lg border bg-card text-card-foreground shadow-sm"
+    >
+      <div
+        class="flex flex-col space-y-1.5 p-6"
+      >
+        <h3
+          class="text-2xl font-semibold leading-none tracking-tight"
+        >
+          Services
+        </h3>
+      </div>
+      <div
+        class="p-0"
+      >
+        <div
+          class="divide-y"
+        >
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <div
+                class="h-8 w-8 rounded bg-muted flex items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-package h-4 w-4 text-muted-foreground"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+                  />
+                  <path
+                    d="M12 22V12"
+                  />
+                  <polyline
+                    points="3.29 7 12 12 20.71 7"
+                  />
+                  <path
+                    d="m7.5 4.27 9 5.15"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  Watermark Remover
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                down
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-red-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`StatusDashboard Snapshot Tests matches snapshot with partial outage 1`] = `
+<div>
+  <div
+    class="space-y-4"
+  >
+    <div
+      class="rounded-lg border p-4 text-center font-medium bg-yellow-50 text-yellow-800 border-yellow-200"
+    >
+      Partial System Outage
+    </div>
+    <div
+      class="rounded-lg border bg-card text-card-foreground shadow-sm"
+    >
+      <div
+        class="flex flex-col space-y-1.5 p-6"
+      >
+        <h3
+          class="text-2xl font-semibold leading-none tracking-tight"
+        >
+          Services
+        </h3>
+      </div>
+      <div
+        class="p-0"
+      >
+        <div
+          class="divide-y"
+        >
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <div
+                class="h-8 w-8 rounded bg-muted flex items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-package h-4 w-4 text-muted-foreground"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+                  />
+                  <path
+                    d="M12 22V12"
+                  />
+                  <polyline
+                    points="3.29 7 12 12 20.71 7"
+                  />
+                  <path
+                    d="m7.5 4.27 9 5.15"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  Watermark Remover
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                  45ms
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                operational
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-green-500"
+              />
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+          >
+            <div
+              class="flex items-center gap-3"
+            >
+              <div
+                class="h-8 w-8 rounded bg-muted flex items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-package h-4 w-4 text-muted-foreground"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+                  />
+                  <path
+                    d="M12 22V12"
+                  />
+                  <polyline
+                    points="3.29 7 12 12 20.71 7"
+                  />
+                  <path
+                    d="m7.5 4.27 9 5.15"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium"
+                >
+                  TTS Studio
+                </p>
+                <p
+                  class="text-xs text-muted-foreground"
+                >
+                  5000ms
+                   · Checked just now
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs text-muted-foreground capitalize"
+              >
+                degraded
+              </span>
+              <div
+                class="h-3 w-3 rounded-full bg-yellow-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,93 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "P28 Portal28" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e8]: P28
+            - generic [ref=e9]: Portal28
+          - button [ref=e10] [cursor=pointer]:
+            - img [ref=e11]
+        - navigation [ref=e16]:
+          - link "Home" [ref=e17] [cursor=pointer]:
+            - /url: /
+            - img [ref=e18]
+            - text: Home
+          - link "Courses" [ref=e23] [cursor=pointer]:
+            - /url: /courses
+            - img [ref=e24]
+            - text: Courses
+          - link "Bundles" [ref=e27] [cursor=pointer]:
+            - /url: /bundles
+            - img [ref=e28]
+            - text: Bundles
+        - link "Sign In" [ref=e34] [cursor=pointer]:
+          - /url: /login
+          - img [ref=e35]
+          - text: Sign In
+    - generic [ref=e38]:
+      - banner [ref=e39]:
+        - generic [ref=e41]:
+          - img
+          - searchbox "Search..." [ref=e42] [cursor=pointer]
+        - generic [ref=e43]:
+          - button [ref=e44] [cursor=pointer]:
+            - img [ref=e45]
+          - link "Sign In" [ref=e47] [cursor=pointer]:
+            - /url: /login
+      - main [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Portal 28
+            - heading "Step inside the room where power gets built." [level=1] [ref=e53]
+            - generic [ref=e54]:
+              - paragraph [ref=e55]: Portal 28 isn't a course hub. It's a threshold.
+              - paragraph [ref=e56]: A private clubhouse for founders, creators, and CEOs who know they're meant to operate at a higher level—and are done playing small with their story, their voice, and their brand.
+            - generic [ref=e57]:
+              - link "Enter the Room" [ref=e58] [cursor=pointer]:
+                - /url: /courses
+                - text: Enter the Room
+                - img [ref=e59]
+              - link "Sign In" [ref=e61] [cursor=pointer]:
+                - /url: /login
+            - paragraph [ref=e62]: You don't stumble into this room. You unlock it.
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - heading "This is where strategy meets intuition." [level=2] [ref=e65]
+              - paragraph [ref=e66]:
+                - text: Where storytelling becomes leverage.
+                - text: Where the AI age stops being scary—and starts working for you.
+            - generic [ref=e67]:
+              - generic [ref=e69]:
+                - img [ref=e70]
+                - heading "Brand Story" [level=3] [ref=e73]
+                - paragraph [ref=e74]: Build a brand narrative that actually sounds like you—and survives the algorithm.
+              - generic [ref=e76]:
+                - img [ref=e77]
+                - heading "Social Storytelling" [level=3] [ref=e81]
+                - paragraph [ref=e82]: Turn content into a narrative people follow. Cohesion instead of chaos.
+              - generic [ref=e84]:
+                - img [ref=e85]
+                - heading "CEO Power Portal" [level=3] [ref=e89]
+                - paragraph [ref=e90]: The inner room. Ongoing strategy for people building long-term power.
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: About the Founder
+            - heading "Hi, I'm Sarah. I build brands that actually mean something." [level=2] [ref=e95]
+            - generic [ref=e96]:
+              - paragraph [ref=e97]: I'm the founder of Portal Copy Co., where I help founders, creatives, and operators turn messy ideas into clear, powerful messaging—and turn that messaging into momentum.
+              - paragraph [ref=e98]: I've spent years at the intersection of brand strategy, storytelling, content systems, and now, AI-powered creation.
+              - paragraph [ref=e99]: Portal 28 is the evolution of that work.
+              - paragraph [ref=e100]: This platform exists for people who don't just want better copy—they want command over their narrative.
+          - generic [ref=e103]:
+            - heading "Portal 28 is open." [level=2] [ref=e104]
+            - paragraph [ref=e105]: If you're here, you already felt the pull.
+            - link "Step Inside" [ref=e106] [cursor=pointer]:
+              - /url: /courses
+              - text: Step Inside
+              - img [ref=e107]
+  - alert [ref=e109]
+```

@@ -1,0 +1,313 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpsellModal Snapshot Tests matches snapshot when modal is closed 1`] = `<div />`;
+
+exports[`UpsellModal Snapshot Tests matches snapshot when modal is open 1`] = `
+<div>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  >
+    <div
+      class="bg-white rounded-2xl max-w-md w-full mx-4 p-6 space-y-4 relative"
+    >
+      <button
+        class="absolute top-4 right-4 text-gray-400 hover:text-black"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+      <div
+        class="text-center"
+      >
+        <span
+          class="text-xs font-bold uppercase tracking-wider text-red-600"
+        >
+          One-Time Offer - Expires in 
+          30
+          :
+          00
+        </span>
+      </div>
+      <h2
+        class="text-2xl font-bold text-center"
+      >
+        Get 50% Off Pro Plan!
+      </h2>
+      <p
+        class="text-gray-600 text-center"
+      >
+        Upgrade now and save big on your purchase
+      </p>
+      <div
+        class="flex items-center justify-center gap-3"
+      >
+        <span
+          class="text-3xl font-bold"
+        >
+          $49
+        </span>
+        <span
+          class="text-xl text-gray-400 line-through"
+        >
+          $99
+        </span>
+      </div>
+      <div
+        class="space-y-3 pt-4"
+      >
+        <button
+          class="w-full py-3 rounded-lg bg-black text-white font-medium hover:bg-gray-800 disabled:opacity-50"
+        >
+          Yes, Add to My Order!
+        </button>
+        <button
+          class="w-full py-3 rounded-lg border text-gray-600 hover:bg-gray-50"
+        >
+          No thanks, I'll pass
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UpsellModal Snapshot Tests matches snapshot with all optional props 1`] = `
+<div>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  >
+    <div
+      class="bg-white rounded-2xl max-w-md w-full mx-4 p-6 space-y-4 relative"
+    >
+      <button
+        class="absolute top-4 right-4 text-gray-400 hover:text-black"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+      <div
+        class="text-center"
+      >
+        <span
+          class="text-xs font-bold uppercase tracking-wider text-red-600"
+        >
+          One-Time Offer - Expires in 
+          60
+          :
+          00
+        </span>
+      </div>
+      <h2
+        class="text-2xl font-bold text-center"
+      >
+        Exclusive Deal Just For You!
+      </h2>
+      <p
+        class="text-gray-600 text-center"
+      >
+        This is a one-time opportunity to get our premium plan at a massive discount. Don't miss out!
+      </p>
+      <div
+        class="flex items-center justify-center gap-3"
+      >
+        <span
+          class="text-3xl font-bold"
+        >
+          $149
+        </span>
+        <span
+          class="text-xl text-gray-400 line-through"
+        >
+          $299
+        </span>
+      </div>
+      <div
+        class="space-y-3 pt-4"
+      >
+        <button
+          class="w-full py-3 rounded-lg bg-black text-white font-medium hover:bg-gray-800 disabled:opacity-50"
+        >
+          Yes, Add to My Order!
+        </button>
+        <button
+          class="w-full py-3 rounded-lg border text-gray-600 hover:bg-gray-50"
+        >
+          No thanks, I'll pass
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UpsellModal Snapshot Tests matches snapshot with minimal props 1`] = `
+<div>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  >
+    <div
+      class="bg-white rounded-2xl max-w-md w-full mx-4 p-6 space-y-4 relative"
+    >
+      <button
+        class="absolute top-4 right-4 text-gray-400 hover:text-black"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+      <div
+        class="text-center"
+      >
+        <span
+          class="text-xs font-bold uppercase tracking-wider text-red-600"
+        >
+          One-Time Offer - Expires in 
+          15
+          :
+          00
+        </span>
+      </div>
+      <h2
+        class="text-2xl font-bold text-center"
+      >
+        Limited Time Offer
+      </h2>
+      <div
+        class="flex items-center justify-center gap-3"
+      >
+        <span
+          class="text-3xl font-bold"
+        >
+          $29
+        </span>
+      </div>
+      <div
+        class="space-y-3 pt-4"
+      >
+        <button
+          class="w-full py-3 rounded-lg bg-black text-white font-medium hover:bg-gray-800 disabled:opacity-50"
+        >
+          Yes, Add to My Order!
+        </button>
+        <button
+          class="w-full py-3 rounded-lg border text-gray-600 hover:bg-gray-50"
+        >
+          No thanks, I'll pass
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UpsellModal Snapshot Tests matches snapshot with short expiration time 1`] = `
+<div>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  >
+    <div
+      class="bg-white rounded-2xl max-w-md w-full mx-4 p-6 space-y-4 relative"
+    >
+      <button
+        class="absolute top-4 right-4 text-gray-400 hover:text-black"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+      <div
+        class="text-center"
+      >
+        <span
+          class="text-xs font-bold uppercase tracking-wider text-red-600"
+        >
+          One-Time Offer - Expires in 
+          5
+          :
+          00
+        </span>
+      </div>
+      <h2
+        class="text-2xl font-bold text-center"
+      >
+        Flash Sale - Act Fast!
+      </h2>
+      <p
+        class="text-gray-600 text-center"
+      >
+        Only 5 minutes left to claim this deal
+      </p>
+      <div
+        class="flex items-center justify-center gap-3"
+      >
+        <span
+          class="text-3xl font-bold"
+        >
+          $19
+        </span>
+        <span
+          class="text-xl text-gray-400 line-through"
+        >
+          $49
+        </span>
+      </div>
+      <div
+        class="space-y-3 pt-4"
+      >
+        <button
+          class="w-full py-3 rounded-lg bg-black text-white font-medium hover:bg-gray-800 disabled:opacity-50"
+        >
+          Yes, Add to My Order!
+        </button>
+        <button
+          class="w-full py-3 rounded-lg border text-gray-600 hover:bg-gray-50"
+        >
+          No thanks, I'll pass
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
